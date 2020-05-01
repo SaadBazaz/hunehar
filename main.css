@@ -1,0 +1,159 @@
+
+
+/* basic style */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto ', sans-serif;
+    font-size: 14px;
+    color: #212121;
+    line-height: 1.4;
+    background-color: #F9F9F9;
+  }
+    
+  
+  
+  /*------------------------------------ NAVBAR LOGIC ------------------------------------ */
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 3px 25px 3px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 21px;
+    background-color: #3949ab;
+    box-shadow: 0px 2px 5px #00000048;
+  }
+  
+  .logo,
+  .nav {
+    display: inline-flex;
+    margin: 0;
+  }
+  
+  /* nav links */
+  .nav {
+    padding: 0;
+    margin-right: 30px;
+    list-style: none;
+  }
+  
+  .nav li {
+    display: inline-block;
+    margin-left: 40px;
+  }
+  
+  .navbar a {
+    color: #FFF;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    color: #DDD;
+  }
+  
+  .nav-right {
+    float: right;
+    line-height: 39px;
+  }
+
+  .nav-left {
+    float: left;
+    line-height: 39px;
+  }
+  
+
+
+
+  /*------------------------------------ MAIN AREA LOGIC ------------------------------------ */
+
+  .main {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    padding: 5px 10px 10px 10px;
+  }
+
+  .card {
+    display: inline-flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    border-style: solid;
+    border-color: rgb(218, 218, 218);
+    border-width: 1px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0px 20px 10px 20px;
+  }
+
+
+  /*------------------------------------ BUTTON LOGIC ------------------------------------ */
+
+  .btn{
+    border: none;
+    height:30px;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+    color: white;
+    background-color: blue;
+    outline: none;
+    /* box-shadow: 12px -1px 6px 0 rgba(0, 0, 0, 0.15),
+    -8px -8px 6px 0 rgba(255, 255, 255, 0.2); */
+
+}
+
+.btn:active{
+    border: none;
+    outline: none;
+}
+
+.btn:focus{
+    box-shadow: 
+    4px 4px 6px 0 rgba(255, 255, 255, 0.3) inset,
+    -4px -4px 6px 0 rgba(0, 0, 0, .3) inset;
+
+    background: linear-gradient(135deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+    background-color: blue;
+    outline: none;
+}
+
+
+
+  
+  
+  /* responsive */
+  @media screen and (max-width: 677px) {
+    .container {
+      width: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .container {
+      width: 90%;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  
+  @media screen and (min-width: 992px) {
+    .container {
+      width: 960px;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+  

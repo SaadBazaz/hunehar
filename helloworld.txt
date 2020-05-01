@@ -1,2 +1,0 @@
-My name is helloworld
-Testing push without pulling

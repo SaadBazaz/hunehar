@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <link href="./main.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+          
+        <div class = "nav nav-left">
+            <h1 class="logo"><a href="./home.html"><img src = "./Logo.PNG" style = "display:inline-block; height:40px; width: auto"></a></h1>
+            <div><svg style = "fill:#ffffff" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 18 18"><path d="M12.44 6.44L9 9.88 5.56 6.44 4.5 7.5 9 12l4.5-4.5z"/></svg></div>
+        </div>
+        <ul class="nav nav-right">
+            <li>
+            <a href="home.html">Home</a>
+            </li>
+            <li>
+                <a href="myprofile.html">My Profile</a>
+            </li>
+            <li>
+                <a href="assignment.html">&#43 New Assignment</a>
+            </li>
+            <li>
+                <a href="calculator.php">Calculator</a>
+            </li>
+        </ul>
+</nav>
+    <div class = "main">
+        <div class = "card">
+            <h1>Create an assignment.</h1>
+
+            <form action = "assignment_submission.php" method = "post">
+                <table>
+                    <tr>
+                        <th><input type="email" placeholder="Slate Email ID" name="s_email" style = "width:100%"></td>
+                        <th><input type="password" placeholder="Password" name="s_password" style = "width:100%"></td>
+                    </tr>
+                    <tr>
+                        <td  colspan = "2"><textarea id = "assignment-content" placeholder="Type your work here!" name="s_content" style="width: 100%;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="s_getEmail"><label>Get email confirmation</label></label></td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            Get radio updates
+                            <input type="radio" name="s_getRadio" value="Yeah"><label>Yeah</label>
+                            <input type="radio" name="s_getRadio" value="Nah"><label>Nah</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="teacher">Select a teacher</label>
+                            <select id="teacher" name="s_teacher">
+                                <option value="Ma'am Maimoona"><label>Ma'am Maimoona</label>
+                                <option value="Sir Saqlain"><label>Sir Saqlain</label>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <centre>
+                            <td>
+                            <button class="btn" type="submit" onclick="alert('Your work has been saved as a draft. Remember to submit it!')">Save Draft</button>
+                            <button class="btn" type="submit" onclick="alert('Your assignment has been submitted! Congrats.')">Submit</button></td>
+                        </centre>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!-- <div>
+            Welcome <?php echo $_POST["s_email"]; ?>!<br />
+            You are <?php echo $_POST["s_password"]; ?> years old.
+        </div> -->
+
+    </div>
+</body>
