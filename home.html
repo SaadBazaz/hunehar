@@ -2,6 +2,8 @@
 <head>
 
     <link href="./main.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./home.js"></script>
+
 
 </head>
 
@@ -14,25 +16,79 @@
             <h1 class="logo"><a href="./home.html"><img src = "./Logo.PNG" style = "display:inline-block; height:40px; width: auto"></a></h1>
             <div><svg style = "fill:#ffffff" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 18 18"><path d="M12.44 6.44L9 9.88 5.56 6.44 4.5 7.5 9 12l4.5-4.5z"/></svg></div>
         </div>
-        <ul class="nav nav-right">
-            <li>
-            <a href="home.html">Home</a>
-            </li>
-            <li>
-                <a href="myprofile.html">My Profile</a>
-            </li>
-            <li>
-                <a href="assignment.html">&#43 New Assignment</a>
-            </li>
-            <li>
-                <a href="calculator.php">Calculator</a>
-            </li>
-        </ul>
+        <div class="nav nav-right">
+            <!-- <div class="link-button">
+                hello world
+            </div> -->
+            <div class="nav-links">
+            <!-- <li class="link link-button">
+                    hello world
+                </li> -->
+                <!-- <div class="link"> -->
+                <a href="home.html"><div>Dashboard</div></a>
+                <!-- </div> -->
+                <!-- <div class="link"> -->
+                    <a href="myprofile.html">Classes</a>
+                <!-- </div> -->
+                <!-- <div class="link"> -->
+                    <a href="assignment.html">Students</a>
+                <!-- </div> -->
+                <!-- <div class="link"> -->
+                    <a href="calculator.php">Parents</a>
+                <!-- </div> -->
+                <!-- <li>
+
+                </li> -->
+            </div>
+            <div onclick="openContextMenu(event, 'image-cropper')" class="image-cropper profile-button">
+                <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+            </div>
+        </div>
 </nav>
 
     <div class = "main">
-        <div class = "card">
-            <h1>Welcome to Slate.</h1>
+        
+        <div class = "main-header">
+            <div class = "main-row">
+                <div class = "person">
+                    <div class="person-picture">
+                        <div class="image-cropper" style = "height:80px; width:80px; ">
+                            <img class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                        </div>
+                    </div>
+                    <div class="person-details">
+                        <div class="person-details title">Fawad Khan</div>
+                        <div class="person-details subtitle">ADMINISTRATOR</div>
+                    </div>
+                </div>
+                <div class = "card">
+                    <h1>Welcome to Slate.</h1>
+                </div>
+            </div>
         </div>
+
+        <!-- <div class = "card">
+            <h1>Welcome to Slate.</h1>
+        </div> -->
     </div>
+
+          <!-- / The Context Menu -->
+          <nav id="context-menu" class="context-menu">
+            <div class="context-menu-container-expander">
+
+            <ul class="context-menu__items">
+              <!-- <li class="context-menu__item">
+                <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
+              </li> -->
+              <li class="context-menu__item">
+                <a href="#" class="context-menu__link" data-action="My Account">My Account</a>
+              </li>
+              <li class="context-menu__item">
+                <a href="./login.html" class="context-menu__link_delete" data-action="Sign Out">Sign Out</a>
+              </li>
+            </ul>        
+        </div>
+          </nav>
+
 </body>
+
