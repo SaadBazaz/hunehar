@@ -1,3 +1,28 @@
+<?php
+$db_sid = 
+	"(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = Turab-PC)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+	)";            // Your oracle SID, can be found in tnsnames.ora  ((oraclebase)\app\Your_username\product\11.2.0\dbhome_1\NETWORK\ADMIN) 
+  
+	$db_user = "scott";   // Oracle username e.g "scott"
+	$db_pass = "1234";    // Password for user e.g "1234"
+	$con = oci_connect($db_user,$db_pass,$db_sid); 
+	if($con) 
+	{
+		//echo "Oracle Connection Successful."; 
+	} 
+	else 
+    { 
+		die('Could not connect to Oracle: '); 
+	} 
+?>
+
+
+
 
 
 
@@ -13,12 +38,19 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
     echo "Search Filter has been submitted. ";
     echo "Please search ".$_POST['filter_search'];
     $filter_search = $_POST['filter_search'];
+	if (is_numeric( $filter_search))
+	{
+		$sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID and (C.CLASS_ID = ".$filter_search.")";
+
+	}
+    else
+		$sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID and (CLASS_TITLE LIKE '".$filter_search."')";
+}
+else {
+    $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID";
 }
 
 ?>
-
-
-
 
 
 
@@ -95,32 +127,43 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
 
 
 
-        <?php 
+                        <?php 
+						$query_id = oci_parse($con, $sql_select);
+						$result = oci_execute($query_id);
+						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
+						{
+						$Class_ID = $row['CLASS_ID'];
+						$Section = $row['SECTION'];
+						$Class_Title = $row['CLASS_TITLE'];
+						$Male = $row['MALE'];
+						$Female = $row['FEMALE'];
+						$total = $Male + $Female;
 
-        $primary_key = 11223344;
-        for ($x = 0; $x <= 10; $x++) {
         echo "
         <tr>
         <td>".
-        $primary_key
+        $Class_ID
         ."</td>
         <td>
             ".
-            $filter_search_query
+            $Section
             ."
         </td>
         <td>
             5D
         </td>
         <td>".
-        $filter_search
+        $Class_Title
         ."</td>
+        <td>".
+        $total." students (".$Male." M, ".$Female." F)
+        </td>
         <td style=\"width:auto; padding:0\">
             <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
                 <i class=\"fa fa-circle\" style=\"color:greenyellow\"></i>
                 <div class=\"more_options\">
                     <button
-                        onclick=\"openContextMenu(event, 'more_options', '#table-list-item-context-menu', ".$primary_key.")\"
+                        onclick=\"openContextMenu(event, 'more_options', '#table-list-item-context-menu', ".$Class_ID.")\"
                         class=\"mini-button\" style=\"background-color: transparent;\">
                         <i class=\"fa fa-angle-down\"></i>
                     </button>
@@ -129,10 +172,6 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
 
         </td>
         </tr>";
-
-        // increment primary key for testing
-        $primary_key=$primary_key+1;
-
 
     }
         ?>
