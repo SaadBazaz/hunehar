@@ -1,3 +1,23 @@
+var SELECTED_KEY = "";
+
+
+
+function submitFormWithSelectedKey(inputClassName, formName){
+  console.log("The selected key is", inputClassName);
+  elem = document.getElementById(inputClassName);
+  console.log("The selected element is", elem);
+  elem.value = SELECTED_KEY;
+  document.forms[formName].submit();
+}
+
+function openNewTabWithSelectedKey(link){
+  // if (SELECTED_KEY == ""){
+  //   return False;
+  // }
+  window.open(link+'?id='+SELECTED_KEY,'_blank')
+  // window.location.replace('path/to/page.php?orderid=' + orderid);
+}
+
 function hello() {
     console.log("Hello world");   // The function returns the product of p1 and p2
 }
@@ -22,7 +42,9 @@ function hello() {
       windowWidth,
       windowHeight;
 
-function openContextMenu(e, taskItemClassName, contextMenuClassName){
+function openContextMenu(e, taskItemClassName, contextMenuClassName, SelectedKey){
+    SELECTED_KEY = SelectedKey;
+    console.log("Selected key is: ", SELECTED_KEY);
     taskItemInContext = clickInsideElement(e, taskItemClassName);
     if (menuState){
         toggleMenuOff(contextMenuClassName);
