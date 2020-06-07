@@ -3,6 +3,9 @@
 
     <link href="./main.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="./home.js"></script>
+    <!-- FONTAWESOME -->
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 
 </head>
@@ -40,7 +43,7 @@
 
                 </li> -->
             </div>
-            <div onclick="openContextMenu(event, 'image-cropper')" class="image-cropper profile-button">
+            <div onclick="openContextMenu(event, 'image-cropper', '#context-menu')" class="image-cropper profile-button">
                 <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
             </div>
         </div>
@@ -62,11 +65,139 @@
                     </div>
                 </div>
                 <div class = "card">
-                    <h1>Welcome to Slate.</h1>
+                    <h1>خوش آمدید</h1>
                 </div>
             </div>
         </div>
 
+
+        <div class = "main-body">
+            <!-- Body content comes here  -->
+            <div class = "main-row">
+                <!-- <table border="5" rules="none">
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>    
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>    
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>                       
+                        <tr>
+                            <td style="width:80px">
+                                <div  class="image-cropper profile-button">
+                                    <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                i180621
+                            </td>
+                            <td>
+                                Saad Bazaz
+                            </td>
+                            <td>
+                                21 years
+                            </td>
+                            <td>
+                                M
+                            </td>
+                            <td style="width:auto; padding:0">
+                                <div class="status_buttons" style="padding-bottom: 4px;">
+                                    <i class="fa fa-circle" style="color:greenyellow"></i>
+                                    <div class="more_options">
+                                        <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </div>  
+                                </div>
+        
+                            </td>
+                            </tr>                    
+                </table> -->
+            </div>
+        </div>
         <!-- <div class = "card">
             <h1>Welcome to Slate.</h1>
         </div> -->
@@ -89,6 +220,28 @@
             </ul>        
         </div>
           </nav>
+
+
+                    <!-- / The Context Menu 2-->
+                    <nav id="context-menu2" class="context-menu">
+                        <div class="context-menu-container-expander">
+            
+                        <ul class="context-menu__items">
+                          <!-- <li class="context-menu__item">
+                            <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
+                          </li> -->
+                          <li class="context-menu__item">
+                            <a href="#" class="context-menu__link" data-action="View Info">View Info</a>
+                          </li>
+                          <li class="context-menu__item">
+                            <a href="#" class="context-menu__link" data-action="Change Class...">Change Class...</a>
+                          </li>
+                          <li class="context-menu__item">
+                            <a href="./login.html" class="context-menu__link_delete" data-action="Delete">Delete</a>
+                          </li>
+                        </ul>        
+                    </div>
+                      </nav>
 
 </body>
 

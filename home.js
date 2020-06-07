@@ -3,6 +3,7 @@ function hello() {
 }
 
     // Your Menu Class Name
+
     var contextMenuClassName = "context-menu",
       contextMenuItemClassName = "context-menu__item",
       contextMenuLinkClassName = "context-menu__link",
@@ -21,27 +22,27 @@ function hello() {
       windowWidth,
       windowHeight;
 
-function openContextMenu(e, taskItemClassName){
+function openContextMenu(e, taskItemClassName, contextMenuClassName){
     taskItemInContext = clickInsideElement(e, taskItemClassName);
     if (menuState){
-        toggleMenuOff();
+        toggleMenuOff(contextMenuClassName);
     }
     else
     if (taskItemInContext) {
     e.preventDefault();
-    toggleMenuOn();
+    toggleMenuOn(contextMenuClassName);
     positionMenu(e);
     } else {
     taskItemInContext = null;
-    toggleMenuOff();
+    toggleMenuOff(contextMenuClassName);
     }
 }
 
     /**
      * Turns the custom context menu on.
      */
-    function toggleMenuOn() {
-        menu = document.querySelector("#context-menu");
+    function toggleMenuOn(contextMenuClassName) {
+        menu = document.querySelector(contextMenuClassName);
         if (menuState !== 1) {
           menuState = 1;
           menu.classList.add(contextMenuActive);
@@ -51,8 +52,8 @@ function openContextMenu(e, taskItemClassName){
       /**
        * Turns the custom context menu off.
        */
-      function toggleMenuOff() {
-        menu = document.querySelector("#context-menu");
+      function toggleMenuOff(contextMenuClassName) {
+        menu = document.querySelector(contextMenuClassName);
         if (menuState !== 0) {
           menuState = 0;
           menu.classList.remove(contextMenuActive);

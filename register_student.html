@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+
+    <link href="./main.css" type="text/css" rel="stylesheet">
+    <link href="./register_student.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./home.js"></script>
+    <script type="text/javascript" src="./register_student.js"></script>
+
+    <!-- FONTAWESOME -->
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+</head>
+
+<body>
+    <div class="md-stepper-horizontal orange">
+        <div class="md-step active done" onclick="hello()" id="Step_1">
+          <div class="md-step-circle"><span>1</span></div>
+          <div class="md-step-title">Student</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+        </div>
+        <div class="md-step active done" onclick="hello()" id="Step_2">
+          <div class="md-step-circle"><span>2</span></div>
+          <div class="md-step-title">Parents</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+        </div>
+        <div class="md-step active" onclick="hello()" id="Step_3">
+          <div class="md-step-circle"><span>3</span></div>
+          <div class="md-step-title">Guardian</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+        </div>
+        <div class="md-step" id="Step_4">
+          <div class="md-step-circle"><span>4</span></div>
+          <div class="md-step-title">Employee Discount</div>
+          <div class="md-step-optional">Optional</div>
+          <div class="md-step-bar-left"></div>
+          <div class="md-step-bar-right"></div>
+        </div>
+      </div>
+    <div class="main-content-body" style="padding-top: 25px;">
+        <div class="main-row">
+            <div class="main-header"  style = "width:100%; justify-content: center;">
+                <div class="main-header-title" style="padding:0; text-align: center;" >
+                    Student Information
+                </div>
+            </div>
+        </div>
+        <div class="main-row">
+            <button onclick="UnlockStep('Step_4')"> Next </button>
+        </div>
+    </div>
+
+    
+</body>
