@@ -2,8 +2,9 @@
 
 
 
-
+<!-- /* All forms on this page are detected and handled here. Enter your queries! */ -->
 <?php
+
 if(isset($_POST["deleteItemForm_isSubmitted"])){
     echo "deleteItemForm has been submitted. ";
     echo "Please delete ".$_POST['context_menu_delete'];
@@ -11,7 +12,9 @@ if(isset($_POST["deleteItemForm_isSubmitted"])){
 else if(isset($_POST["searchFilterForm_isSubmitted"])){
     echo "Search Filter has been submitted. ";
     echo "Please search ".$_POST['filter_search'];
+    $filter_search = $_POST['filter_search'];
 }
+
 ?>
 
 
@@ -89,9 +92,12 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
                     <th></th>
                     <th></th>
                     </tr> -->
-                    <?php 
-                    $filter_search_query = $_POST["filter_search"];
-                    $primary_key = 11223344;
+
+
+
+        <?php 
+
+        $primary_key = 11223344;
         for ($x = 0; $x <= 10; $x++) {
         echo "
         <tr>
@@ -106,9 +112,9 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
         <td>
             5D
         </td>
-        <td>
-            21 students (10F,11M)
-        </td>
+        <td>".
+        $filter_search
+        ."</td>
         <td style=\"width:auto; padding:0\">
             <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
                 <i class=\"fa fa-circle\" style=\"color:greenyellow\"></i>
