@@ -36,6 +36,34 @@ function openContextMenu(e, taskItemClassName, contextMenuClassName){
     taskItemInContext = null;
     toggleMenuOff(contextMenuClassName);
     }
+
+
+    document.body.addEventListener('click', eventToggler);
+    document.body.contextMenuClassName = contextMenuClassName;
+    document.body.countContext=0;
+    function eventToggler(e){
+      var contextMenuClassName = e.currentTarget.contextMenuClassName;
+      var elem = document.querySelector(contextMenuClassName);
+      if (menuState == 1 && (e.target == elem || childOf(e.target, elem) || e.currentTarget.countContext == 0)) {
+        console.log("Clicked the Element");
+        e.currentTarget.countContext = e.currentTarget.countContext+1;
+      } else {
+        console.log("Clicked something other than the Element.");
+        toggleMenuOff(contextMenuClassName);
+        e.currentTarget.countContext = 0;
+        document.body.removeEventListener('click', eventToggler);
+      }
+  }
+
+}
+
+
+
+function childOf(/*child node*/c, /*parent node*/p){ //returns boolean
+  // console.log("child is ", c);
+  // console.log("parent is ", p);
+  while((c=c.parentNode)&&c!==p); 
+  return !!c; 
 }
 
     /**
@@ -109,9 +137,9 @@ function openContextMenu(e, taskItemClassName, contextMenuClassName){
       }
 
 function clickInsideElement(e, className) {
-    console.log (e);
+    // console.log (e);
     var el = e.srcElement || e.target;
-    console.log (el);
+    // console.log (el);
     if (el.classList.contains(className)) {
       return el;
     } else {
@@ -313,54 +341,68 @@ function clickInsideElement(e, className) {
     initMenuFunction();
   })();
   
+
+  function openModal(modalClassName) {
+    var modal = document.querySelector(modalClassName);
+    modal.style.display = 'block';
+    
+    // modContent.removeClass('modal-animated-out').addClass('modal-animated-in');
+  }
+
+  function closeModal(modalClassName) {
+    var modal = document.querySelector(modalClassName);
+    modal.style.display = 'none';
+    
+    // modContent.removeClass('modal-animated-out').addClass('modal-animated-in');
+  }
   
   
-  $(document).ready(function() {
-    setTimeout(popup, 3000);
-    function popup() {
-      $("#logindiv").css("display", "block");
-    }
-    $("#login #cancel").click(function() {
-      $(this).parent().parent().hide();
-    });
-    $("#onclick").click(function() {
-      $("#contactdiv").css("display", "block");
-    });
-    $("#contact #cancel").click(function() {
-      $(this).parent().parent().hide();
-    });
-    // Contact form popup send-button click event.
-    $("#send").click(function() {
-      var name = $("#name").val();
-      var email = $("#email").val();
-      var contact = $("#contactno").val();
-      var message = $("#message").val();
-      if (name == "" || email == "" || contactno == "" || message == ""){
-        alert("Please Fill All Fields");
-      }else{
-        if (validateEmail(email)) {
-          $("#contactdiv").css("display", "none");
-        }else {
-          alert('Invalid Email Address');
-        }
-        function validateEmail(email) {
-          var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-          if (filter.test(email)) {
-            return true;
-          }else {
-            return false;
-          }
-        }
-      }
-    });
-    // Login form popup login-button click event.
-    $("#loginbtn").click(function() {
-      var name = $("#username").val();
-      var password = $("#password").val();
-      if (username == "" || password == ""){
-        alert("Username or Password was Wrong");
-      }else{
-        $("#logindiv").css("display", "none");
-      }
-    });
-  });
+  // $(document).ready(function() {
+  //   setTimeout(popup, 3000);
+  //   function popup() {
+  //     $("#logindiv").css("display", "block");
+  //   }
+  //   $("#login #cancel").click(function() {
+  //     $(this).parent().parent().hide();
+  //   });
+  //   $("#onclick").click(function() {
+  //     $("#contactdiv").css("display", "block");
+  //   });
+  //   $("#contact #cancel").click(function() {
+  //     $(this).parent().parent().hide();
+  //   });
+  //   // Contact form popup send-button click event.
+  //   $("#send").click(function() {
+  //     var name = $("#name").val();
+  //     var email = $("#email").val();
+  //     var contact = $("#contactno").val();
+  //     var message = $("#message").val();
+  //     if (name == "" || email == "" || contactno == "" || message == ""){
+  //       alert("Please Fill All Fields");
+  //     }else{
+  //       if (validateEmail(email)) {
+  //         $("#contactdiv").css("display", "none");
+  //       }else {
+  //         alert('Invalid Email Address');
+  //       }
+  //       function validateEmail(email) {
+  //         var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+  //         if (filter.test(email)) {
+  //           return true;
+  //         }else {
+  //           return false;
+  //         }
+  //       }
+  //     }
+  //   });
+  //   // Login form popup login-button click event.
+  //   $("#loginbtn").click(function() {
+  //     var name = $("#username").val();
+  //     var password = $("#password").val();
+  //     if (username == "" || password == ""){
+  //       alert("Username or Password was Wrong");
+  //     }else{
+  //       $("#logindiv").css("display", "none");
+  //     }
+  //   });
+  // });
