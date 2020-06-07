@@ -334,6 +334,19 @@ body {
     border-radius: 10px;
     padding: 0px 20px 10px 20px;
     animation: 0.8s ease-out 0s 1 slideInFromTop;
+    position: relative;
+  }
+  .card-close-button{
+    visibility: hidden;
+    position: absolute;
+    /* background: red; */
+    color: rgb(129, 129, 129);
+    top: 5px;
+    right: 10px;
+  }
+
+  .card:hover .card-close-button{
+    visibility: visible;
   }
 
   /*------------------------------------ FOOTER LOGIC ------------------------------------*/

@@ -20,28 +20,11 @@
             <div><svg style = "fill:#ffffff" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 18 18"><path d="M12.44 6.44L9 9.88 5.56 6.44 4.5 7.5 9 12l4.5-4.5z"/></svg></div>
         </div>
         <div class="nav nav-right">
-            <!-- <div class="link-button">
-                hello world
-            </div> -->
             <div class="nav-links">
-            <!-- <li class="link link-button">
-                    hello world
-                </li> -->
-                <!-- <div class="link"> -->
-                <a href="home.html"><div>Dashboard</div></a>
-                <!-- </div> -->
-                <!-- <div class="link"> -->
-                    <a href="myprofile.html">Classes</a>
-                <!-- </div> -->
-                <!-- <div class="link"> -->
-                    <a href="assignment.html">Students</a>
-                <!-- </div> -->
-                <!-- <div class="link"> -->
-                    <a href="calculator.php">Parents</a>
-                <!-- </div> -->
-                <!-- <li>
-
-                </li> -->
+                <a href="home.html">Dashboard</a>
+                <a href="classes.html">Classes</a>
+                <a href="students.html">Students</a>
+                <a href="parents.html">Parents</a>
             </div>
             <div onclick="openContextMenu(event, 'image-cropper', '#context-menu')" class="image-cropper profile-button">
                 <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
@@ -64,13 +47,26 @@
                         <div class="person-details subtitle">ADMINISTRATOR</div>
                     </div>
                 </div>
-                <div class = "card">
+                <div class = "card" id="card1">
+                    <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
                     <h1>خوش آمدید</h1>
                 </div>
             </div>
         </div>
 
-
+        <div class="person-information-grid">
+            <div class="person-information-grid-row">
+                <p>Male</p>
+                <p>Class 1D</p>
+                <p>DoB: 08/02/1999</p>
+            </div>
+            <div class="person-information-grid-row">
+                <p>Male</p>
+                <p>Class 1D</p>
+                <p>Born on 08/02/1999</p>
+            </div>            
+            
+        </div>
         <div class = "main-body">
             <!-- Body content comes here  -->
             <div class = "main-row">
@@ -221,27 +217,6 @@
         </div>
           </nav>
 
-
-                    <!-- / The Context Menu 2-->
-                    <nav id="context-menu2" class="context-menu">
-                        <div class="context-menu-container-expander">
-            
-                        <ul class="context-menu__items">
-                          <!-- <li class="context-menu__item">
-                            <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
-                          </li> -->
-                          <li class="context-menu__item">
-                            <a href="#" class="context-menu__link" data-action="View Info">View Info</a>
-                          </li>
-                          <li class="context-menu__item">
-                            <a href="#" class="context-menu__link" data-action="Change Class...">Change Class...</a>
-                          </li>
-                          <li class="context-menu__item">
-                            <a href="./login.html" class="context-menu__link_delete" data-action="Delete">Delete</a>
-                          </li>
-                        </ul>        
-                    </div>
-                      </nav>
 
 </body>
 

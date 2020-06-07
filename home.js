@@ -406,3 +406,9 @@ function clickInsideElement(e, className) {
   //     }
   //   });
   // });
+
+  function destroyCard(cardClassName){
+    console.log(cardClassName);
+    var card = document.querySelector(cardClassName);
+    card.style.display = 'none'; 
+  }
