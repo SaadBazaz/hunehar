@@ -49,8 +49,9 @@ if (isset($_GET['id'])) {
 <?php
                     $query_id = oci_parse($con, $sql_select);
                     $result = oci_execute($query_id);
-                    if ($result){
-                        $row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS);
+					$row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS);
+                    if ($row)
+					{
                         $ID = $row['F_ID'];
                         $Name = $row['F_NAME'];
                         $CNIC = $row['F_CNIC'];
@@ -61,11 +62,13 @@ if (isset($_GET['id'])) {
                         $ParentType = "Father";   
                         $Alive_Status = ($IsAlive == "1"  ? 1 : 0);
  
-                    }else{
-                        $query_id2 = oci_parse($con, $sql_select2);
+                    }
+                    else{
+						$query_id2 = oci_parse($con, $sql_select2);
                         $result2 = oci_execute($query_id2);
-                        if ($result2){
-                            $row = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS);
+						 $row = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS);
+                        if ($row)
+						{
                             $ID = $row['M_ID'];
                             $Name = $row['M_NAME'];
                             $CNIC = $row['M_CNIC'];
@@ -79,8 +82,7 @@ if (isset($_GET['id'])) {
                         else{
                             $error = "Couldn't retreive any parent against this ID.";
                         }
-                    }
-
+					}
 ?>
 
 

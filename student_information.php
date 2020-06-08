@@ -45,10 +45,9 @@ if (isset($_GET['id'])) {
                     $result = oci_execute($query_id);
                     if ($result){
                         $row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS);
-                        $ID = $row['S_PID'];
-                        $RollNumber = $row['ROLL_NUMBER'];
+                        $ID = $row['S_ROLLNUMBER'];
                         $Name = $row['S_NAME'];
-                        $BayForm = $row['S_BAYFORMNO '];
+                        $BayForm = $row['S_BAYFORMNO'];
                         $Gender  = $row['S_GENDER'];
                         $DOB = $row['DOB'];
                         $YearEnrolled = $row['S_YEARENROLLED'];
@@ -107,7 +106,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="person-details">
                         <div class="person-details title"><?php echo $Name ?></div>
-                        <div class="person-details subtitle"><?php echo $RollNumber ?></div>
+                        <div class="person-details subtitle"><?php echo $ID ?></div>
                     </div>
                 </div>
                 <div class = "card" id="card1">

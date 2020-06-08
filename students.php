@@ -60,72 +60,12 @@ else {
 
 ?>
 
-<?php 
-						$query_id = oci_parse($con, $sql_select);
-						$result = oci_execute($query_id);
-						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
-						{
-                        $ID = $row['S_ROLLNUMBER'];
-                        $Name = $row['S_NAME'];
-                        $BayForm = $row['S_BAYFORMNO'];
-                        $Gender  = $row['S_GENDER'];
-                        $DOB = $row['DOB'];
-                        $YearEnrolled = $row['S_YEARENROLLED'];
-                        $FatherID = $row['F_ID'];
-                        $MotherID = $row['M_ID']; 
-                        $GuardianID = $row['G_ID'];   
-                        $GuardianRelation  = $row['G_RELATION'];
-
-        echo "
-        <tr>
-        <td style=\"width:80px\">
-            <div class=\"image-cropper profile-button\">
-                <img class=\"nav-img\" src=\"../images/Saad-Bazaz.jpg\">
-            </div>
-        </td>
-        <td>".
-        $ID
-        ."</td>
-        <td>
-            ".
-            $Name
-            ."
-        </td>
-        <td>
-            5D
-        </td>
-        <td>".
-        $Gender
-        ."</td>
-        <td>".
-        $YearEnrolled
-        </td>
-        <td style=\"width:auto; padding:0\">
-            <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
-                <i class=\"fa fa-circle\" style=\"color:greenyellow\"></i>
-                <div class=\"more_options\">
-                    <button
-                        onclick=\"openContextMenu(event, 'more_options', '#table-list-item-context-menu', ".$ID.")\"
-                        class=\"mini-button\" style=\"background-color: transparent;\">
-                        <i class=\"fa fa-angle-down\"></i>
-                    </button>
-                </div>
-            </div>
-
-        </td>
-        </tr>";
-
-    }
-    ?>
-
-
-
 <!DOCTYPE html>
 
 <head>
 
-    <link href="./main.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="./home.js"></script>
+    <link href="./public/html/main.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./public/html/home.js"></script>
     <!-- FONTAWESOME -->
     <!-- jQuery library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -169,7 +109,7 @@ else {
                 <div class="main-header-assistive">
                     <div class="input-container">
                         <i class="fa fa-search" style="margin-right: 10px;margin-top:5px"></i>
-                        <form  name="searchFilterForm" action="./classes.php" method="POST">
+                        <form  name="searchFilterForm" action="./students.php" method="POST">
                             <input type="text" placeholder="Search"  name="filter_search" />
                             <input type="submit" name="searchFilterForm_isSubmitted" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
                         </form>
@@ -200,454 +140,64 @@ else {
                     <th></th>
                     <th></th>
                     </tr> -->
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
+					
+<?php 
+						$query_id = oci_parse($con, $sql_select);
+						$result = oci_execute($query_id);
+						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
+						{
+                        $ID = $row['S_ROLLNUMBER'];
+                        $Name = $row['S_NAME'];
+                        $BayForm = $row['S_BAYFORMNO'];
+                        $Gender  = $row['S_GENDER'];
+                        $DOB = $row['DOB'];
+                        $YearEnrolled = $row['S_YEARENROLLED'];
+                        $FatherID = $row['F_ID'];
+                        $MotherID = $row['M_ID']; 
+                        $GuardianID = $row['G_ID'];   
+                        $GuardianRelation  = $row['G_RELATION'];
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
+        echo "
+        <tr>
+        <td style=\"width:80px\">
+            <div class=\"image-cropper profile-button\">
+                <img class=\"nav-img\" src=\"./public/images/Saad-Bazaz.jpg\">
+            </div>
+        </td>
+        <td>".
+        $ID
+        ."</td>
+        <td>
+            ".
+            $Name
+            ."
+        </td>
+        <td>
+            5D
+        </td>
+        <td>".
+        $Gender
+        ."</td>
+        <td>".
+        $YearEnrolled."
+        </td>
+        <td style=\"width:auto; padding:0\">
+            <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
+                <i class=\"fa fa-circle\" style=\"color:greenyellow\"></i>
+                <div class=\"more_options\">
+                    <button
+                        onclick=\"openContextMenu(event, 'more_options', '#table-list-item-context-menu', '".$ID."')\"
+                        class=\"mini-button\" style=\"background-color: transparent;\">
+                        <i class=\"fa fa-angle-down\"></i>
+                    </button>
+                </div>
+            </div>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
+        </td>
+        </tr>";
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:80px">
-                            <div class="image-cropper profile-button">
-                                <img class="nav-img" src="../images/Saad-Bazaz.jpg">
-                            </div>
-                        </td>
-                        <td>
-                            i180621
-                        </td>
-                        <td>
-                            Saad Bazaz
-                        </td>
-                        <td>
-                            21 years
-                        </td>
-                        <td>
-                            M
-                        </td>
-                        <td style="width:auto; padding:0">
-                            <div class="status_buttons" style="padding-bottom: 4px;">
-                                <i class="fa fa-circle" style="color:greenyellow"></i>
-                                <div class="more_options">
-                                    <button
-                                        onclick="openContextMenu(event, 'more_options', '#table-list-item-context-menu')"
-                                        class="mini-button" style="background-color: transparent;">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </td>
-                    </tr>
+    }
+    ?>
                 </table>
             </div>
         </div>
@@ -685,7 +235,8 @@ else {
                             <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
                           </li> -->
                 <li class="context-menu__item">
-                    <a href="./student_information.html" target="_blank" class="context-menu__link" data-action="View Info">View Info</a>
+                   <a onclick="openNewTabWithSelectedKey('./student_information.php')" class="context-menu__link" data-action="View Info">View Info</a>
+
                 </li>
                 <li class="context-menu__item">
                     <a onclick="openModal('#student-accompanying-modal')" class="context-menu__link"
