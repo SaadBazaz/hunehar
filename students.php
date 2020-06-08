@@ -53,6 +53,58 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
         WHERE S_ROLLNUMBER like '".$filter_search."' or S_NAME like '".$filter_search."'";
     }
 }
+else if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
+    echo "Advanced Search Filter has been submitted. ";
+    $Student_ID=$_POST['Student_ID'];
+    $Student_Name=$_POST['Student_Name'];
+    $Exact_Match=$_POST['Exact_Match'];
+    $Group_By=$_POST['GroupLabels'];
+    $Student_Status=$_POST['ActiveStatus'];
+    $From_Date=$_POST['From'];
+    $To_Date=$_POST['To'];
+
+    echo "Please advanced search: ".$Student_ID.", ".
+    $Student_Name.", ".
+    $Exact_Match.", ".
+    $Group_By.", ".
+    $Student_Status.", ".
+    $From_Date.", ".
+    $To_Date;
+
+}
+else if(isset($_POST["classChangeForm_isSubmitted"])){
+    echo "Change Class form has been submitted. ";
+    $Student_ID=$_POST['StudentID'];
+    $Current_Class=$_POST['CurrentClass'];
+    $New_Class=$_POST['NewClass'];
+    $Class_Change_Reason=$_POST['ClassChangeReason'];
+    $Approved_By=$_POST['ApprovedBy'];
+
+
+    echo "Please change class: ".$Student_ID.", ".
+    $Current_Class.", ".
+    $New_Class.", ".
+    $Class_Change_Reason.", ".
+    $Approved_By;
+}
+else if(isset($_POST["accompanyStudentForm_isSubmitted"])){
+    echo "Accompany Student form has been submitted. ";
+    $Student_ID=$_POST['StudentID'];
+    $Student_Name=$_POST['StudentName'];
+    $Class=$_POST['Class'];
+    $Guardian_ID=$_POST['GuardianID'];
+    $Guardian_Name=$_POST['GuardianName'];
+    $Pregnant=$_POST['Pregnant'];
+    $Reason_For_Parent_Absence=$_POST['ReasonForParentAbsence'];
+
+    echo "Please accompany student: ".$Student_ID.", ".
+    $Student_Name.", ".
+    $Class.", ".
+    $Guardian_ID.", ".
+    $Guardian_Name.", ".
+    $Pregnant.", ".
+    $Reason_For_Parent_Absence;
+}
 else {
     $sql_select = "SELECT * 
     FROM student";
@@ -249,9 +301,13 @@ else {
                          data-action="Change Class" style="pointer-events: auto; cursor: pointer;">Change Class...</a>
                 </li>
                 <li class="context-menu__item">
-                    <a href="./login.html" class="context-menu__link_delete" data-action="Delete">Delete</a>
+                    <a onclick="submitFormWithSelectedKey('#context_menu_delete', 'deleteItemForm')" class="context-menu__link_delete" data-action="Delete">Delete</a>
                 </li>
             </ul>
+            <form name="deleteItemForm" action="./classes.php" method="POST">
+                <input type="hidden" name="context_menu_delete" id="#context_menu_delete"/>
+                <input type="hidden" name="deleteItemForm_isSubmitted" value="1">
+            </form>
         </div>
     </nav>
 
@@ -262,7 +318,7 @@ else {
 
         <div class="context-menu-container-expander">
 
-            <form name="FilterSearch" target="" method="post">
+            <form name="advancedFilterSearchForm" action="./students.php" method="POST">
                 <ul class="context-menu__items">
                     <!-- <li class="context-menu__item">
                                 <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
@@ -271,7 +327,7 @@ else {
                         <div class="context-menu__link_generic">
                             <div class="input-container"
                                 style="width: 100%; height:100%; padding:0;margin:0; background-color: #EEEEEE; border:none; outline:none; ">
-                                <input type="text" placeholder="Student ID"
+                                <input name="Student_ID" type="text" placeholder="Student ID"
                                     style="margin:0; padding:0 4px 0 4px;  color: #A7A7A7;" />
                             </div>
                         </div>
@@ -280,15 +336,15 @@ else {
                         <div class="context-menu__link_generic">
                             <div class="input-container"
                                 style="width: 100%; height:100%; padding:0;margin:0; background-color: #EEEEEE; border:none; outline:none; ">
-                                <input type="text" placeholder="Student Name"
+                                <input name="Student_Name" type="text" placeholder="Student Name"
                                     style="margin:0; padding:0 4px 0 4px;  color: #A7A7A7;" />
                             </div>
                         </div>
                     </li>
                     <li class="context-menu__item">
                         <div class="context-menu__link_generic">
-                            <input type="checkbox" id="exactmatch" name="ExactMatch" value="ExactMatch">
-                            <label for="exactmatch"> Exact Match</label>
+                            <input type="checkbox" id="exactmatch" name="Exact_Match">
+                            <label for="Exact_Match"> Exact Match</label>
                         </div>
                     </li>
                     <li class="context-menu__item">
@@ -322,6 +378,7 @@ else {
                         </div>
                     </li>
                 </ul>
+                <input type="hidden" name="advancedFilterSearchForm_isSubmitted" value="1">
             </form>
         </div>
     </nav>
@@ -351,7 +408,7 @@ else {
             <!-- Modal Body -->
             <div class="modal-body">
                 <!-- <h3>Hello</h3> -->
-                <form method="POST">
+                <form action="./students.php" method="POST">
                     <div class="main-row" style="padding-top: 20px;">
                         <label for="StudentID" style="font-style: italic;">Student ID </label>
                         <input type="text" name="StudentID" placeholder="Student ID" value="i180621"
@@ -382,6 +439,7 @@ else {
                             </div>
                         </li>
                     </div>
+                    <input type="hidden" name="classChangeForm_isSubmitted" value="1">
                 </form>
             </div>
         </div>
@@ -401,7 +459,7 @@ else {
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-                <form method="POST">
+                <form action="./students.php" method="POST">
 
 
                     <h3 style="color:black">Student Information</h3>
@@ -449,6 +507,7 @@ else {
                             </div>
                         </li>
                     </div>
+                    <input type="hidden" name="accompanyStudentForm_isSubmitted" value="1">
                 </form>
             </div>
         </div>
