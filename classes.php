@@ -38,7 +38,10 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
     echo "Search Filter has been submitted. ";
     echo "Please search ".$_POST['filter_search'];
     $filter_search = $_POST['filter_search'];
-	if (is_numeric( $filter_search))
+    if ($filter_search == ""){
+        $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID";
+    }
+	else if (is_numeric( $filter_search))
 	{
 		$sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID and (C.CLASS_ID = ".$filter_search.")";
 
@@ -200,7 +203,7 @@ else {
             <ul class="context-menu__items">
             <li class="context-menu__item">
                     <a onclick="openNewTabWithSelectedKey('./student_information.php')" class="context-menu__link" data-action="View Info">View Info</a>
-                </li>
+            </li>
             <li class="context-menu__item">
                     <a onclick="submitFormWithSelectedKey('#context_menu_delete', 'deleteItemForm')" class="context-menu__link_delete" data-action="Delete">Delete</a>
             </li>
