@@ -60,6 +60,63 @@ else {
 
 ?>
 
+<?php 
+						$query_id = oci_parse($con, $sql_select);
+						$result = oci_execute($query_id);
+						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
+						{
+                        $ID = $row['S_ROLLNUMBER'];
+                        $Name = $row['S_NAME'];
+                        $BayForm = $row['S_BAYFORMNO'];
+                        $Gender  = $row['S_GENDER'];
+                        $DOB = $row['DOB'];
+                        $YearEnrolled = $row['S_YEARENROLLED'];
+                        $FatherID = $row['F_ID'];
+                        $MotherID = $row['M_ID']; 
+                        $GuardianID = $row['G_ID'];   
+                        $GuardianRelation  = $row['G_RELATION'];
+
+        echo "
+        <tr>
+        <td style=\"width:80px\">
+            <div class=\"image-cropper profile-button\">
+                <img class=\"nav-img\" src=\"../images/Saad-Bazaz.jpg\">
+            </div>
+        </td>
+        <td>".
+        $ID
+        ."</td>
+        <td>
+            ".
+            $Name
+            ."
+        </td>
+        <td>
+            5D
+        </td>
+        <td>".
+        $Gender
+        ."</td>
+        <td>".
+        $YearEnrolled
+        </td>
+        <td style=\"width:auto; padding:0\">
+            <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
+                <i class=\"fa fa-circle\" style=\"color:greenyellow\"></i>
+                <div class=\"more_options\">
+                    <button
+                        onclick=\"openContextMenu(event, 'more_options', '#table-list-item-context-menu', ".$ID.")\"
+                        class=\"mini-button\" style=\"background-color: transparent;\">
+                        <i class=\"fa fa-angle-down\"></i>
+                    </button>
+                </div>
+            </div>
+
+        </td>
+        </tr>";
+
+    }
+    ?>
 
 
 
