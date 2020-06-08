@@ -1,3 +1,71 @@
+<?php
+$db_sid = 
+	"(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = Turab-PC)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+	)";            // Your oracle SID, can be found in tnsnames.ora  ((oraclebase)\app\Your_username\product\11.2.0\dbhome_1\NETWORK\ADMIN) 
+  
+	$db_user = "scott";   // Oracle username e.g "scott"
+	$db_pass = "1234";    // Password for user e.g "1234"
+	$con = oci_connect($db_user,$db_pass,$db_sid); 
+	if($con) 
+	{
+		//echo "Oracle Connection Successful."; 
+	} 
+	else 
+    { 
+		die('Could not connect to Oracle: '); 
+	} 
+?>
+
+
+<?php
+if (isset($_GET['id'])) {
+    $ID = $_GET['id'];
+    $sql_select = "SELECT * 
+    FROM student
+    WHERE s_rollnumber = '".$ID."' ";
+
+} else {
+    $error = "No ID has been specified.";
+    //redirecting back to Parents page
+    header("Location: ./students.php");
+    die();
+}
+
+?>
+
+
+
+<?php
+                    $query_id = oci_parse($con, $sql_select);
+                    $result = oci_execute($query_id);
+                    if ($result){
+                        $row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS);
+                        $ID = $row['S_PID'];
+                        $RollNumber = $row['ROLL_NUMBER'];
+                        $Name = $row['S_NAME'];
+                        $BayForm = $row['S_BAYFORMNO '];
+                        $Gender  = $row['S_GENDER'];
+                        $DOB = $row['DOB'];
+                        $YearEnrolled = $row['S_YEARENROLLED'];
+                        $FatherID = $row['F_ID'];
+                        $MotherID = $row['M_ID']; 
+                        $GuardianID = $row['G_ID'];   
+                        $GuardianRelation  = $row['G_RELATION'];
+ 
+                    }else{
+                        $error = "Couldn't retreive any parent against this ID.";
+                    }
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <head>
 
@@ -38,8 +106,8 @@
                         </div>
                     </div>
                     <div class="person-details">
-                        <div class="person-details title">Saad Bazaz</div>
-                        <div class="person-details subtitle">i180621</div>
+                        <div class="person-details title"><?php echo $Name ?></div>
+                        <div class="person-details subtitle"><?php echo $RollNumber ?></div>
                     </div>
                 </div>
                 <div class = "card" id="card1">
