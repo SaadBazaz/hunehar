@@ -71,6 +71,11 @@ else if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
     $From_Date.", ".
     $To_Date;
 
+
+    // $sql_select = "SELECT * 
+    // FROM student
+    // WHERE S_ROLLNUMBER like '".$filter_search."' or S_NAME like '".$filter_search."'";
+
 }
 else if(isset($_POST["classChangeForm_isSubmitted"])){
     echo "Change Class form has been submitted. ";
@@ -188,8 +193,10 @@ else {
             <div class="main-row">
                 <table border="5" rules="none">
                     <tr>
+                    <th>Picture</th>
                     <th>Student ID</th>
                     <th>Name</th>
+                    <th>Class</th>
                     <th>Gender</th>
                     <th>Year Enrolled</th>
 
