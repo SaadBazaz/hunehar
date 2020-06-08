@@ -43,14 +43,17 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
     }
 	else if (is_numeric( $filter_search))
 	{
-		$sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID and (C.CLASS_ID = ".$filter_search.")";
+        $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B
+        where C.CLASS_ID = B.CLASS_ID and (lower(C.CLASS_ID) = lower(".$filter_search."))";
 
 	}
     else
-		$sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID and (CLASS_TITLE LIKE '".$filter_search."')";
+        $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B 
+        where C.CLASS_ID = B.CLASS_ID and (lower(CLASS_TITLE) LIKE lower('".$filter_search."'))";
 }
 else {
-    $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B where C.CLASS_ID = B.CLASS_ID";
+    $sql_select = "select C.CLASS_ID, C.SECTION, C.CLASS_TITLE, B.MALE, B.FEMALE from CLASS_TABLE C, BOHT B 
+    where C.CLASS_ID = B.CLASS_ID";
 }
 
 ?>
@@ -153,9 +156,6 @@ else {
             ".
             $Section
             ."
-        </td>
-        <td>
-            5D
         </td>
         <td>".
         $Class_Title

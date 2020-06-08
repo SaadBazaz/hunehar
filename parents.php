@@ -42,7 +42,7 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
         $sql_select2 = "SELECT M_ID, M_NAME, M_CNIC, M_NUM, M_ADDRESS, M_ISALIVE, M_EMP_ID 
         FROM mother";
     }
-	else if (is_numeric( $filter_search))
+	/*else if (is_numeric( $filter_search))
 	{
         $sql_select = "SELECT F_ID, F_NAME, F_CNIC, F_NUM, F_ADDRESS, F_ISALIVE, F_EMP_ID 
         FROM father 
@@ -50,14 +50,14 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
         $sql_select2 = "SELECT M_ID, M_NAME, M_CNIC, M_NUM, M_ADDRESS, M_ISALIVE, M_EMP_ID 
         FROM mother
         WHERE M_CNIC like '".$filter_search."'";
-	}
+	}*/
     else{
         $sql_select = "SELECT F_ID, F_NAME, F_CNIC, F_NUM, F_ADDRESS, F_ISALIVE, F_EMP_ID 
         FROM father 
-        WHERE F_CNIC like '".$filter_search."' or F_ID like '".$filter_search."' or F_NAME like '".$filter_search."'";
-        $sql_select2 = "M_ID, M_NAME, M_CNIC, M_NUM, M_ADDRESS, M_ISALIVE, M_EMP_ID 
+        WHERE lower(F_ID) like lower('".$filter_search."') or lower(F_NAME) like lower('".$filter_search."')";
+        $sql_select2 = "select M_ID, M_NAME, M_CNIC, M_NUM, M_ADDRESS, M_ISALIVE, M_EMP_ID 
         FROM mother
-        WHERE M_CNIC like '".$filter_search."' or M_ID like '".$filter_search."' or M_NAME like '".$filter_search."'";
+        WHERE lower(M_ID) like lower('".$filter_search."') or lower(M_NAME) like lower('".$filter_search."')";
     }
 }
 else {
@@ -145,7 +145,9 @@ else {
 					<?php
 						$query_id = oci_parse($con, $sql_select);
 						$result = oci_execute($query_id);
-						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
+						if ($result)
+						{
+							while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
 						{
                         $ID = $row['F_ID'];
 						$Name = $row['F_NAME'];
@@ -196,12 +198,16 @@ else {
                         </td>
                     </tr>
 					";
+						}
+						
                     }
                     
 
                     $query_id2 = oci_parse($con, $sql_select2);
                     $result2 = oci_execute($query_id2);
-                    while($row = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS)) 
+					if ($result2)
+					{
+						while($row = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS)) 
                     {
                     $ID = $row['M_ID'];
                     $Name = $row['M_NAME'];
@@ -250,6 +256,8 @@ else {
                     </td>
                 </tr>
                 ";
+					}
+                    
                 }
                     
 					

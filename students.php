@@ -26,11 +26,27 @@ $db_sid =
 <!-- /* All forms on this page are detected and handled here. Enter your queries! */ -->
 <?php
 
+//default query to run
+$sql_select = "SELECT * 
+FROM student";
+
+
+
 if(isset($_POST["deleteItemForm_isSubmitted"])){
     echo "deleteItemForm has been submitted. ";
     echo "Please delete ".$_POST['context_menu_delete'];
+
+    $Student_ID = $_POST['context_menu_delete'];
+
+    $sql_delete = "DELETE
+    FROM student
+    WHERE s_rollnumber = '". $Student_ID."'";
+
+    // header("Refresh:0");
+
 }
-else if(isset($_POST["searchFilterForm_isSubmitted"])){
+
+if(isset($_POST["searchFilterForm_isSubmitted"])){
     echo "Search Filter has been submitted. ";
     echo "Please search ".$_POST['filter_search'];
     $filter_search = $_POST['filter_search'];
@@ -50,18 +66,53 @@ else if(isset($_POST["searchFilterForm_isSubmitted"])){
     else{
         $sql_select = "SELECT * 
         FROM student
-        WHERE S_ROLLNUMBER like '".$filter_search."' or S_NAME like '".$filter_search."'";
+        WHERE lower(S_ROLLNUMBER) like lower('".$filter_search."') or lower(S_NAME) like lower('".$filter_search."')";
     }
 }
-else if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
+if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
     echo "Advanced Search Filter has been submitted. ";
-    $Student_ID=$_POST['Student_ID'];
-    $Student_Name=$_POST['Student_Name'];
-    $Exact_Match=$_POST['Exact_Match'];
-    $Group_By=$_POST['GroupLabels'];
-    $Student_Status=$_POST['ActiveStatus'];
-    $From_Date=$_POST['From'];
-    $To_Date=$_POST['To'];
+    $selectquery = "";
+    $fromquery = "";
+    $groupbyquery = "";
+    $havingquery = "";
+    $wherequery = "";
+
+    $equator = " like ";
+    if (isset($_POST['Exact_Match'])){
+        $Exact_Match=$_POST['Exact_Match'];
+        if ($Exact_Match == "on")
+            $equator = " = ";
+    }
+
+    if (isset($_POST['Student_ID'])){
+        $Student_ID=$_POST['Student_ID'];
+        $wherequery = $wherequery." and s.s_rollnumber ".$equator." '".$Student_ID."' ";
+    }
+    if (isset($_POST['Student_Name'])){
+        $Student_Name=$_POST['Student_Name'];
+        $wherequery = $wherequery." and s.s_name ".$equator." '".$Student_Name."' ";
+    }
+
+    // if (isset($_POST['GroupLabels'])){
+    //     $Group_By=$_POST['GroupLabels'];
+    //     if ($Group_By != "None"){
+    //         $groupbyquery = . 
+    //     }
+    // }
+
+    if (isset($_POST['ActiveStatus'])){
+        $Student_Status=$_POST['ActiveStatus'];
+        if (    $Student_Status == "Dormant"    ){
+            $From_Date=$_POST['From'];
+            $To_Date=$_POST['To'];
+            $selectquery = $selectquery.", r.class_id";
+            $fromquery = $fromquery.", Registration R";
+            $wherequery = $wherequery."s.s_rollnumber = r.s_rollnumber and 
+        (MONTHS_BETWEEN(to_char(to_date('".$From_Date."','YYYY-MM-DD'), 'DD-MON-YY'),r.r_date)) > ".$To_Date;
+        }
+    }
+
+
 
     echo "Please advanced search: ".$Student_ID.", ".
     $Student_Name.", ".
@@ -71,13 +122,15 @@ else if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
     $From_Date.", ".
     $To_Date;
 
-
-    // $sql_select = "SELECT * 
-    // FROM student
-    // WHERE S_ROLLNUMBER like '".$filter_search."' or S_NAME like '".$filter_search."'";
+     $sql_select = "select unique s.s_rollnumber, s.s_name, s.s_gender, s.s_yearenrolled".$selectquery." 
+                    from student s".$fromquery."
+                    where s.s_rollnumber NOT NULL".$wherequery."
+                    ".$groupbyquery."
+                    ".$havingquery."
+                    ".$sortbyquery;
 
 }
-else if(isset($_POST["classChangeForm_isSubmitted"])){
+if(isset($_POST["classChangeForm_isSubmitted"])){
     echo "Change Class form has been submitted. ";
     $Student_ID=$_POST['StudentID'];
     $Current_Class=$_POST['CurrentClass'];
@@ -92,7 +145,7 @@ else if(isset($_POST["classChangeForm_isSubmitted"])){
     $Class_Change_Reason.", ".
     $Approved_By;
 }
-else if(isset($_POST["accompanyStudentForm_isSubmitted"])){
+if(isset($_POST["accompanyStudentForm_isSubmitted"])){
     echo "Accompany Student form has been submitted. ";
     $Student_ID=$_POST['StudentID'];
     $Student_Name=$_POST['StudentName'];
@@ -110,10 +163,7 @@ else if(isset($_POST["accompanyStudentForm_isSubmitted"])){
     $Pregnant.", ".
     $Reason_For_Parent_Absence;
 }
-else {
-    $sql_select = "SELECT * 
-    FROM student";
-}
+
 
 ?>
 
@@ -175,7 +225,7 @@ else {
                             <i class="fa fa-filter"></i>
                         </button>
                     </div>
-                    <button onclick=" window.open('./register_student.html','_blank')" class="btn"
+                    <button onclick=" window.open('./register_student.php','_blank')" class="btn"
                         style="background-color: #45E900;">
                         &#xf234; Register Student
                     </button>
@@ -207,6 +257,7 @@ else {
 						$result = oci_execute($query_id);
 						while($row = oci_fetch_array($query_id, OCI_BOTH+OCI_RETURN_NULLS)) 
 						{
+                        $ProfilePictureURI = "./public/images/default-picture_0_0.png";
                         $ID = $row['S_ROLLNUMBER'];
                         $Name = $row['S_NAME'];
                         $BayForm = $row['S_BAYFORMNO'];
@@ -222,7 +273,7 @@ else {
         <tr>
         <td style=\"width:80px\">
             <div class=\"image-cropper profile-button\">
-                <img class=\"nav-img\" src=\"./public/images/Saad-Bazaz.jpg\">
+                <img class=\"nav-img\" src=\"".$ProfilePictureURI."\">
             </div>
         </td>
         <td>".
@@ -373,8 +424,8 @@ else {
                             </select>
                             <label for="ActiveStatus" style="margin-left: 5px;margin-right: 5px;"> from </label>
                             <input type="date" id="From" name="From" style="width:140px"><br>
-                            <label for="From" style="margin-left: 5px;margin-right: 5px;">to</label>
-                            <input type="date" id="To" name="To" style="width:140px">
+                            <label for="From" style="margin-left: 5px;margin-right: 5px;">since</label>
+                            <input type="number" id="To" name="To" style="width:140px">
 
                         </div>
                     </li>
@@ -423,7 +474,7 @@ else {
                     </div>
                     <div class="main-row">
                         <label for="CurrentClass" style="font-style: italic;">Current Class </label>
-                        <input type="text" name="CurrentClass" placeholder="Current Class" value="5D" disabled
+                        <input type="text" name="CurrentClass" placeholder="Current Class" value="5D"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row">
@@ -496,7 +547,7 @@ else {
                     </div>
                     <div class="main-row">
                         <label for="GuardianName" style="font-style: italic;">Guardian Name </label>
-                        <input type="text" name="GuardianName" placeholder="Enter Guardian Name..." value="Shabaana Bibi" disabled
+                        <input type="text" name="GuardianName" placeholder="Enter Guardian Name..." value="Shabaana Bibi"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row" style="justify-content: flex-start;">
