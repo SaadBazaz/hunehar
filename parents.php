@@ -213,8 +213,9 @@ else {
                         
             
                     $Alive_Status = ($IsAlive == "1"  ? "visibility:visible" : "visibility:hidden");
-                    // $Employee_Status = ($EmpID)
-                echo "
+                    $Employee_Status = ($EmpID == 0 ? "" : "(".$EmpID.")");
+
+                    echo "
                 <tr>
                     <td>
                         ".$ID."
@@ -232,10 +233,7 @@ else {
                         ".$Address."
                     </td>
                     <td>
-                        ".$IsAlive."
-                    </td>
-                    <td>
-                        Mother ".$EmpID."
+                        Mother ".$Employee_Status."
                     </td>
                     <td style=\"width:auto; padding:0\">
                         <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">
