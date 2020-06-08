@@ -120,7 +120,7 @@ else {
                 <div class="main-header-assistive">
                     <div class="input-container">
                         <i class="fa fa-search" style="margin-right: 10px;margin-top:5px"></i>
-                        <form  name="searchFilterForm" action="./classes.php" method="POST">
+                        <form  name="searchFilterForm" action="./parents.php" method="POST">
                             <input type="text" placeholder="Search"  name="filter_search" />
                             <input type="submit" name="searchFilterForm_isSubmitted" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
                         </form>
@@ -134,11 +134,14 @@ else {
             <!-- Body content comes here  -->
             <div class="main-row">
                 <table border="5" rules="none">
-                    <!-- <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    </tr> -->
+                    <tr>
+                    <th>Parent ID</th>
+                    <th>Name</th>
+                    <th>CNIC</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Relation</th>
+                    </tr>
 					<?php
 						$query_id = oci_parse($con, $sql_select);
 						$result = oci_execute($query_id);
@@ -154,8 +157,11 @@ else {
 							
                 
                         $Alive_Status = ($IsAlive == "1"  ? "visibility:visible" : "visibility:hidden");
-                        // $Employee_Status = ($EmpID)
-					echo "
+                        $Employee_Status = ($EmpID == 0 ? "" : "(".$EmpID.")");
+
+
+
+                        echo "
                     <tr>
                         <td>
                             ".$ID."
@@ -173,10 +179,7 @@ else {
                             ".$Address."
                         </td>
 						<td>
-                            ".$IsAlive."
-                        </td>
-						<td>
-                            Father ".$EmpID."
+                            Father ".$Employee_Status."
                         </td>
                         <td style=\"width:auto; padding:0\">
                             <div class=\"status_buttons\" style=\"padding-bottom: 4px;\">

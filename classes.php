@@ -122,11 +122,13 @@ else {
 
             <div class="main-row">
                 <table border="5" rules="none">
-                    <!-- <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    </tr> -->
+                    <tr>
+                    <th>Class ID</th>
+                    <th>Section</th>
+                    <th>Class Title</th>
+                    <th>Strength</th>
+
+                    </tr>
 
 
 

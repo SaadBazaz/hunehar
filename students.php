@@ -87,10 +87,10 @@ else {
         </div>
         <div class="nav nav-right">
             <div class="nav-links">
-                <a href="home.html">Dashboard</a>
-                <a href="classes.html">Classes</a>
-                <a href="students.html">Students</a>
-                <a href="parents.html">Parents</a>
+                <a href="home.php">Dashboard</a>
+                <a href="classes.php">Classes</a>
+                <a href="students.php">Students</a>
+                <a href="parents.php">Parents</a>
             </div>
             <div onclick="openContextMenu(event, 'image-cropper', '#profile-picture-context-menu')"
                 class="image-cropper profile-button">
@@ -135,11 +135,13 @@ else {
             <!-- Body content comes here  -->
             <div class="main-row">
                 <table border="5" rules="none">
-                    <!-- <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    </tr> -->
+                    <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Year Enrolled</th>
+
+                    </tr>
 					
 <?php 
 						$query_id = oci_parse($con, $sql_select);
