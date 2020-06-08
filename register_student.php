@@ -1,3 +1,117 @@
+<?php
+
+/*
+------ MEGA INDEX OF ALL FIELDS:
+Student_Photo_URI
+Student_Name
+Student_Date_of_Birth
+Student_Gender
+
+Father_ID
+Father_Name
+Father_Date_of_Birth
+Father_Phone_Number
+Father_CNIC
+Father_Email
+Father_Address
+
+Mother_ID
+Mother_Name
+Mother_Date_of_Birth
+Mother_Phone_Number
+Mother_CNIC
+Mother_Email
+Mother_Address
+
+Guardian_ID
+Guardian_Name
+Guardian_Relation
+Guardian_Date_of_Birth
+Guardian_Phone_Number
+Guardian_CNIC
+Guardian_Email
+Guardian_Address
+
+Staff_Fee_Amount
+Staff_Discount
+Staff_Final_Amount
+Staff_Fully_Paid
+Staff_Challan_Number
+*/
+
+
+
+
+if(isset($_POST["registerStudentForm_isSubmitted"])){
+
+
+  $Student_Photo_URI  =  $_POST['Student_Photo_URI'];
+  $Student_Name   =   $_POST['Student_Name'];
+  $Student_Date_of_Birth  =  $_POST['Student_Date_of_Birth'];
+  $Student_Gender   =   $_POST['Student_Gender'];
+
+  if(isset($_POST['Father_ID'])){
+    $Father_ID  =  $_POST['Father_ID'];
+  }
+  else {
+    $Father_Name  =  $_POST['Father_Name'];
+    $Father_Date_of_Birth   =   $_POST['Father_Date_of_Birth'];
+    $Father_Phone_Number  =  $_POST['Father_Phone_Number'];
+    $Father_CNIC  =  $_POST['Father_CNIC'];
+    $Father_Email   =   $_POST['Father_Email'];
+    $Father_Address   =   $_POST['Father_Address'];  
+  }
+
+  if(isset($_POST['Mother_ID'])){
+    $Mother_ID  =  $_POST['Mother_ID'];
+  }
+  else{
+    $Mother_Name  =  $_POST['Mother_Name'];
+    $Mother_Date_of_Birth   =   $_POST['Mother_Date_of_Birth'];
+    $Mother_Phone_Number  =  $_POST['Mother_Phone_Number'];
+    $Mother_CNIC  =  $_POST['Mother_CNIC'];
+    $Mother_Email   =   $_POST['Mother_Email'];
+    $Mother_Address   =   $_POST['Mother_Address'];
+  }
+
+  if(isset($_POST['Guardian_ID'])){
+    $Guardian_ID  =  $_POST['Guardian_ID'];
+  }
+  else{
+    $Guardian_Name  =  $_POST['Guardian_Name'];
+    $Guardian_Relation  =  $_POST['Guardian_Relation'];
+    $Guardian_Date_of_Birth   =   $_POST['Guardian_Date_of_Birth'];
+    $Guardian_Phone_Number  =  $_POST['Guardian_Phone_Number'];
+    $Guardian_CNIC  =  $_POST['Guardian_CNIC'];
+    $Guardian_Email   =   $_POST['Guardian_Email'];
+    $Guardian_Address   =   $_POST['Guardian_Address'];      
+  }
+
+  $Staff_Fee_Amount   =   $_POST['Staff_Fee_Amount'];
+  $Staff_Discount   =   $_POST['Staff_Discount'];
+  $Staff_Final_Amount   =   $_POST['Staff_Final_Amount'];
+  $Staff_Fully_Paid   =   $_POST['Staff_Fully_Paid'];
+  $Staff_Challan_Number   =   $_POST['Staff_Challan_Number'];
+
+
+  $sql_insert = "INSERT INTO Student
+  
+  "
+
+
+
+
+}
+
+
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 
 <head>
@@ -212,9 +326,9 @@
 
       <div class="main-row" style="flex:1; justify-content: center">
         <div class="whole-input-container">
-          <label for="Mother_Name">Father Name</label>
+          <label for="Mother_Name">Mother Name</label>
           <div class="input-container" style=" flex:0; width:auto;">
-            <input type="text" name="Mother_Name" id="Mother_Name" placeholder="Enter Father Name"/>
+            <input type="text" name="Mother_Name" id="Mother_Name" placeholder="Enter Mother Name"/>
           </div>
         </div>
       </div>
@@ -432,7 +546,7 @@
 
 
       <div class="main-row" style="width:100%; justify-content: center;">
-        <button class="stepper-button"> Finish </button>
+        <button class="stepper-button" name="registerStudentForm_isSubmitted"> Finish </button>
       </div>
 
     </div>
