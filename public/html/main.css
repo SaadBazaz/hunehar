@@ -258,6 +258,7 @@ body {
     padding-right: 200px;
     font-weight: 1000;
     font-size: 35px;  
+    overflow-x: auto;
   }
 
   .main-header-assistive{
@@ -335,6 +336,7 @@ body {
     padding: 0px 20px 10px 20px;
     animation: 0.8s ease-out 0s 1 slideInFromTop;
     position: relative;
+    overflow-y: auto;
   }
   .card-close-button{
     visibility: hidden;
@@ -796,7 +798,7 @@ input[type="submit"]:hover{
 
   
   
-  /* responsive */
+  /* responsive
   @media screen and (max-width: 677px) {
     .container {
       width: 80%;
@@ -825,5 +827,5 @@ input[type="submit"]:hover{
     .container {
       width: 1170px;
     }
-  }
+  } */
   

@@ -37,6 +37,34 @@ if (isset($_GET['id']))
     die();
 }
 
+if (isset($_GET['editStudentForm_isSubmitted'])){
+ 
+	$Name	=	$_POST['Name'];
+	$BayForm	=	$_POST['BayForm'];
+	$Gender	=	$_POST['Gender'];
+	$DOB	=	$_POST['DOB'];
+	$Year_Enrolled	=	$_POST['Year_Enrolled'];
+	$Father_ID	=	$_POST['Father_ID'];
+	$Mother_ID	=	$_POST['Mother_ID'];
+	$Guardian_ID	=	$_POST['Guardian_ID'];
+	$Guardian_Relation	=	$_POST['Guardian_Relation'];
+	
+	$sql_update = "UPDATE student
+	SET 
+		s_name = '".$Name."',
+		s_Bayformno = '".$BayForm."',
+		s_gender = '".$Gender."',
+		DOB = to_char(to_date('".$DOB."','YYYY-MM-DD'), 'DD-MON-YY'),
+		S_YEARENROLLED = '".$Year_Enrolled."',
+		F_ID = '".$Father_ID."',
+		M_ID = '".$Mother_ID."',
+		G_ID = '".$Guardian_ID."',
+		G_RELATION = '".$Guardian_Relation."' 
+
+	WHERE s_rollnumber = '".$ID."'";
+
+} 
+
 ?>
 
 
@@ -87,7 +115,7 @@ if (isset($_GET['id']))
 							$row2 = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS);	// for mother info
 							if ($row2)
 							{
-								$mother_name = $row2['M_NAME'];
+								$Mother_Name = $row2['M_NAME'];
 							}
 							else
 							{
@@ -102,7 +130,7 @@ if (isset($_GET['id']))
 							$row3 = oci_fetch_array($query_id3, OCI_BOTH+OCI_RETURN_NULLS);	// for father info
 							if ($row3)
 							{
-								$Father_name = $row3['F_NAME'];
+								$Father_Name = $row3['F_NAME'];
 							}
 							else
 							{
@@ -161,7 +189,7 @@ if (isset($_GET['id']))
                 Student Information
             </div>
             <button
-                onclick="hello()"
+                onclick="displayCard('#card0')"
                 class="mini-button" style="background-color: transparent;font-size: 25px; padding: 5px 0px 0px 8px">
                 <i class="fa fa-edit"></i>
             </button>
@@ -181,7 +209,46 @@ if (isset($_GET['id']))
                         <div class="person-details title"><?php echo $Name ?></div>
                         <div class="person-details subtitle"><?php echo $ID ?></div>
                     </div>
-                </div>
+				</div>
+				<div class = "card" id="card0">
+                    <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+					<h2>Edit Student</h2>
+					<form action="./student_information.php" method="POST">
+						<input type="text" name="Name" placeholder="Name"/><br/>
+						<input type="text" name="BayForm" placeholder="BayForm"/><br/>
+						<select name="Gender" id="Gender">
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>						
+						<input type="date" name="DOB" placeholder="DOB"/><br/>
+						<input type="text" name="Year_Enrolled" placeholder="Year Enrolled"/><br/>
+						<input type="text" name="Father_ID" placeholder="Father ID"/><br/>
+						<input type="text" name="Mother_ID" placeholder="Mother ID"/><br/>
+						<input type="text" name="Guardian_ID" placeholder="Guardian ID"/><br/>
+						<input type="text" name="Guardian_Relation" placeholder="Guardian Relation"/><br/>
+						<input type="submit" name="editStudentForm_isSubmitted"/><br/>
+					</form>
+				</div>
+
+				<div class = "card" id="card4">
+                    <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card4')"><i class="fa fa-close"></i></button>
+					<h2>Details</h2>
+					<?php
+						echo "
+						Roll Number: ".$ID." <br/>
+						Name: ".$Name." <br/>
+						BayForm: ".$BayForm." <br/>
+						Gender: ".$Gender." <br/>
+						DOB: ".$DOB." <br/>
+						Year Enrolled: ".$YearEnrolled." <br/>
+						Father ID: ".$Father_ID." <br/>
+						Mother ID: ".$Mother_ID." <br/>
+						Guardian ID: ".$GuardianID." <br/>
+						Guardian Relation: ".$GuardianRelation." <br/>
+						";
+					?>
+				</div>
+
                 <div class = "card" id="card1">
                     <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
                     <h1>Hello world!</h1>
@@ -191,7 +258,7 @@ if (isset($_GET['id']))
 		
 		<div class = "main-row">
 			<div class = "card" id="card2" style="width:300px">
-				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card2')"><i class="fa fa-close"></i></button>
 				<h1>Siblings of <?php echo $Name?></h1>
 				<table border="5" rules="none">
 					<tr>
@@ -233,7 +300,7 @@ if (isset($_GET['id']))
 
 
 			<div class = "card" id="card3" style="width:300px">
-				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card3')"><i class="fa fa-close"></i></button>
 				<h1><?php echo $Name?>'s Class History</h1>
 				<table border="5" rules="none">
 					<tr>
@@ -242,12 +309,6 @@ if (isset($_GET['id']))
 						<th>Date Taken</th>
 					</tr>
 				<?php
-
-					// foreach($Class_History as &$value)
-					// {
-					// 	echo "Class_History = ". $value['Class_ID'] . " " . $value['Course_ID']. " " . $value['R_Date']."<br>";
-
-					// }
 
 					foreach($Class_History as &$value)
 					{
@@ -267,11 +328,6 @@ if (isset($_GET['id']))
 							<td>
 							".
 							$value['R_Date']
-							."
-							</td>
-							<td>
-							".
-							$value['G_ID']
 							."
 							</td>
 						</tr>";			

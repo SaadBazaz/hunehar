@@ -144,11 +144,11 @@ if (isset($_GET['id'])) {
             <div class="main-header-title" style="padding:0; text-align: center;" >
                 Parent Information
             </div>
-            <button
+            <!-- <button
                 onclick="hello()"
                 class="mini-button" style="background-color: transparent;font-size: 25px; padding: 5px 0px 0px 8px">
                 <i class="fa fa-edit"></i>
-            </button>
+            </button> -->
         </div>
     </div>
 
@@ -165,17 +165,39 @@ if (isset($_GET['id'])) {
                         <div class="person-details title"><?php echo $Name ?></div>
                         <div class="person-details subtitle"><?php echo $ParentType ?></div>
                     </div>
-                </div>
+				</div>
+				
+
+				<div class = "card" id="card4">
+                    <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card4')"><i class="fa fa-close"></i></button>
+					<h2>Details</h2>
+					<?php
+						echo "
+   						 ".$ParentType." <br/>
+						 ".$ID." <br/>
+						 ".$Name." <br/>
+						 ".$CNIC." <br/>
+						 ".$Number." <br/>
+						 ".$Address." <br/>
+						 ".$isAlive." <br/>
+						 ".$EmpID." <br/>
+						";
+					?>
+				</div>
+
+
+
                 <div class = "card" id="card1">
                     <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
                     <h1>Hello world!</h1>
-                </div>
+				</div>
+			
             </div>
 		</div>
 		
 		<div class = "main-row">
 			<div class = "card" id="card2" style="width:300px">
-				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card2')"><i class="fa fa-close"></i></button>
 				<h1>Children of <?php echo $Name?></h1>
 				<table border="5" rules="none">
 					<tr>
