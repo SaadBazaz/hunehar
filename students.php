@@ -38,9 +38,28 @@ if(isset($_POST["deleteItemForm_isSubmitted"])){
 
     $Student_ID = $_POST['context_menu_delete'];
 
+	$sql_delete0 = "DELETE
+    FROM registration
+    WHERE s_rollnumber = '". $Student_ID."'";
+	
     $sql_delete = "DELETE
     FROM student
     WHERE s_rollnumber = '". $Student_ID."'";
+
+	$query_id00 = oci_parse($con, $sql_delete0);
+	$result0 = oci_execute($query_id00);
+
+	$query_id0 = oci_parse($con, $sql_delete);
+	$result = oci_execute($query_id0);
+	
+	if ($result && $result0)
+	{
+		echo "delete successful";
+	}
+	else
+	{
+		echo "delete error";
+	}
 
     // header("Refresh:0");
 
@@ -76,6 +95,8 @@ if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
     $groupbyquery = "";
     $havingquery = "";
     $wherequery = "";
+	
+	$sortbyquery = "";
 
     $equator = " like ";
     if (isset($_POST['Exact_Match'])){
@@ -107,7 +128,7 @@ if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
             $To_Date=$_POST['To'];
             $selectquery = $selectquery.", r.class_id";
             $fromquery = $fromquery.", Registration R";
-            $wherequery = $wherequery."s.s_rollnumber = r.s_rollnumber and 
+            $wherequery = $wherequery." and s.s_rollnumber = r.s_rollnumber and 
         (MONTHS_BETWEEN(to_char(to_date('".$From_Date."','YYYY-MM-DD'), 'DD-MON-YY'),r.r_date)) > ".$To_Date;
         }
     }
@@ -122,12 +143,14 @@ if(isset($_POST["advancedFilterSearchForm_isSubmitted"])){
     $From_Date.", ".
     $To_Date;
 
-     $sql_select = "select unique s.s_rollnumber, s.s_name, s.s_gender, s.s_yearenrolled".$selectquery." 
-                    from student s".$fromquery."
-                    where s.s_rollnumber NOT NULL".$wherequery."
+     $sql_select = "select unique s.s_rollnumber, s.s_name, s.s_gender, s.s_yearenrolled , s.s_bayformno, s.DOB, s.F_ID, s.M_ID, s.G_ID, s.G_RELATION ".$selectquery." 
+                    from student s ".$fromquery."
+                    where s.s_rollnumber is NOT NULL ".$wherequery."
                     ".$groupbyquery."
                     ".$havingquery."
                     ".$sortbyquery;
+					
+	echo $sql_select;				
 
 }
 if(isset($_POST["classChangeForm_isSubmitted"])){
@@ -144,6 +167,28 @@ if(isset($_POST["classChangeForm_isSubmitted"])){
     $New_Class.", ".
     $Class_Change_Reason.", ".
     $Approved_By;
+	
+	
+	$sql_class1 = "update Registration set class_id = ".$New_Class." where s_rollnumber = '".$Student_ID."' and class_id = ".$Current_Class;
+	$sql_class2 = "update Registration_history set SECTION_CHANGE = '".$Class_Change_Reason."' where s_rollnumber = '".$Student_ID."' and cl_id = ".$Current_Class;
+
+	$query_id124 = oci_parse($con, $sql_class1);
+	$result124 = oci_execute($query_id124);
+
+	$query_id125 = oci_parse($con, $sql_class2);
+	$result125 = oci_execute($query_id125);
+	
+	if ($result125 && $result124)
+	{
+		echo "success class change";
+	}
+	else
+	{
+		echo "Fail class change";
+		die();
+	}
+
+	
 }
 if(isset($_POST["accompanyStudentForm_isSubmitted"])){
     echo "Accompany Student form has been submitted. ";
@@ -153,6 +198,7 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
     $Guardian_ID=$_POST['GuardianID'];
     $Guardian_Name=$_POST['GuardianName'];
     $Pregnant=$_POST['Pregnant'];
+	$Date = $_POST['Accompany_Date'];
     $Reason_For_Parent_Absence=$_POST['ReasonForParentAbsence'];
 
     echo "Please accompany student: ".$Student_ID.", ".
@@ -162,6 +208,24 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
     $Guardian_Name.", ".
     $Pregnant.", ".
     $Reason_For_Parent_Absence;
+	
+	$sql_accompany = "Insert into Accompanier (s_rollnumber,a_date,ID,a_reason,a_pregnant)
+					   values ('".$Student_ID."', to_char(to_date('".$Date."','YYYY-MM-DD'), 'DD-MON-YY'),
+					   '".$Guardian_ID."', '".$Reason_For_Parent_Absence."', '".$Pregnant."')";
+
+	$query_id123 = oci_parse($con, $sql_accompany);
+	$result123 = oci_execute($query_id123);
+	
+	if ($result123)
+	{
+		echo "success accompany";
+	}
+	else
+	{
+		echo "Fail accompany";
+		die();
+	}
+
 }
 
 
@@ -173,11 +237,13 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
 
     <link href="./public/html/main.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="./public/html/home.js"></script>
-    <script type="text/javascript" src="./public/html/students.js"></script>
 
     <!-- FONTAWESOME -->
     <!-- jQuery library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<!-- jQuery (for Ajax) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 
 </head>
@@ -248,7 +314,6 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                     <th>Picture</th>
                     <th>Student ID</th>
                     <th>Name</th>
-                    <th>Class</th>
                     <th>Gender</th>
                     <th>Year Enrolled</th>
 
@@ -285,9 +350,6 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
             ".
             $Name
             ."
-        </td>
-        <td>
-            5D
         </td>
         <td>".
         $Gender
@@ -364,7 +426,7 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                     <a onclick="submitFormWithSelectedKey('#context_menu_delete', 'deleteItemForm')" class="context-menu__link_delete" data-action="Delete">Delete</a>
                 </li>
             </ul>
-            <form name="deleteItemForm" action="./classes.php" method="POST">
+            <form name="deleteItemForm" action="./students.php" method="POST">
                 <input type="hidden" name="context_menu_delete" id="#context_menu_delete"/>
                 <input type="hidden" name="deleteItemForm_isSubmitted" value="1">
             </form>
@@ -552,10 +614,16 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                         <input type="text"  id="GuardianName_accompanyForm" name="GuardianName" placeholder="Enter Guardian Name..." value="Shabaana Bibi"
                             style="margin-left: 5px" />
                     </div>
+					<div class="main-row">
+                        <label for="Accompany_Date" style="font-style: italic;"> Accompany Date </label>
+                            <input type="date" id="From" name="Accompany_Date" style="margin-left: 5px"/><br>
+                  
+                    </div>
+							
                     <div class="main-row" style="justify-content: flex-start;">
                         <label for="Pregnant" style="font-style: italic;">Pregnant?</label>
-                        <input type="radio" name="Pregnant" value="Yes"><label>Yes</label>
-                        <input type="radio" name="Pregnant" value="No"><label>No</label>
+                        <input type="radio" name="Pregnant" value="1"><label>Yes</label>
+                        <input type="radio" name="Pregnant" value="0"><label>No</label>
                     </div>
                     <textarea id="ReasonForParentAbsence" name="ReasonForParentAbsence" placeholder="Reason for Parents' Absence" name="s_content"
                         style="width: 100%;"></textarea>

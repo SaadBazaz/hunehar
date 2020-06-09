@@ -30,15 +30,12 @@ if (isset($_GET['id']))
     FROM student
     WHERE s_rollnumber = '".$ID."' ";
 
-} else {
-    $error = "No ID has been specified.";
-    //redirecting back to Students page
-    header("Location: ./students.php");
-    die();
-}
-
-if (isset($_GET['editStudentForm_isSubmitted'])){
- 
+} 
+else if (isset($_POST['editStudentForm_isSubmitted']))
+{
+	
+	$Date_Format = "YYYY-MM-DD";
+	$ID = $_POST['id'];
 	$Name	=	$_POST['Name'];
 	$BayForm	=	$_POST['BayForm'];
 	$Gender	=	$_POST['Gender'];
@@ -49,12 +46,22 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 	$Guardian_ID	=	$_POST['Guardian_ID'];
 	$Guardian_Relation	=	$_POST['Guardian_Relation'];
 	
+	if ($DOB == "")
+	{
+		$DOB = $_POST['oldDOB'];
+		$Date_Format = "DD-MON-YY";
+	}
+	
+	$sql_select = "SELECT * 
+    FROM student
+    WHERE s_rollnumber = '".$ID."' ";
+	
 	$sql_update = "UPDATE student
 	SET 
 		s_name = '".$Name."',
 		s_Bayformno = '".$BayForm."',
 		s_gender = '".$Gender."',
-		DOB = to_char(to_date('".$DOB."','YYYY-MM-DD'), 'DD-MON-YY'),
+		DOB = to_char(to_date('".$DOB."','".$Date_Format."'), 'DD-MON-YY'),
 		S_YEARENROLLED = '".$Year_Enrolled."',
 		F_ID = '".$Father_ID."',
 		M_ID = '".$Mother_ID."',
@@ -62,8 +69,22 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 		G_RELATION = '".$Guardian_Relation."' 
 
 	WHERE s_rollnumber = '".$ID."'";
+	echo $sql_update;
+					$query_id0 = oci_parse($con, $sql_update);
+                    $result0 = oci_execute($query_id0);
+                    if ($result0)
+					{
+                       echo "Update Successful";
+					} 
+}
+else
+{
+    $error = "No ID has been specified.";
+    //redirecting back to Students page
+    header("Location: ./students.php");
+    die();
+}
 
-} 
 
 ?>
 
@@ -217,21 +238,22 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 					<form action="./student_information.php" method="POST">
 					<?php 
 						echo "
-						<input type=\"text\" name="Name" placeholder="Name"/><br/>
-						<input type="text" name="BayForm" placeholder="BayForm"/><br/>
-						<select name="Gender" id="Gender">
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-							
-						</select>						
-						<input type="date" name="DOB" value="" placeholder="DOB"/><br/>
-						<input type="text" name="Year_Enrolled" placeholder="Year Enrolled"/><br/>
-						<input type="text" name="Father_ID" placeholder="Father ID"/><br/>
-						<input type="text" name="Mother_ID" placeholder="Mother ID"/><br/>
-						<input type="text" name="Guardian_ID" placeholder="Guardian ID"/><br/>
-						<input type="text" name="Guardian_Relation" placeholder="Guardian Relation"/><br/>
-						<input type="submit" name="editStudentForm_isSubmitted"/><br/>";
-						?>
+						<input type=\"hidden\" name=\"id\" placeholder=\"Name\" value=\"".$ID."\"/><br/>
+						<input type=\"text\" name=\"Name\" placeholder=\"Name\" value=\"".$Name."\"/><br/>
+						<input type=\"text\" name=\"BayForm\" placeholder=\"BayForm\" value=\"".$BayForm."\"/><br/>
+						<select name=\"Gender\" id=\"Gender\" value=\"".$Gender."\">
+							<option value=\"M\">Male</option>
+							<option value=\"F\">Female</option>
+						</select><br/>					
+						<input type=\"hidden\" name=\"oldDOB\" placeholder=\"DOB\" value=\"".$DOB."\"/><br/>
+						<input type=\"date\" name=\"DOB\" placeholder=\"DOB\" value=\"".$DOB."\"/><br/>
+						<input type=\"text\" name=\"Year_Enrolled\" placeholder=\"Year Enrolled\" value=\"".$YearEnrolled."\"/><br/>
+						<input type=\"text\" name=\"Father_ID\" placeholder=\"Father ID\" value=\"".$Father_ID."\"/><br/>
+						<input type=\"text\" name=\"Mother_ID\" placeholder=\"Mother ID\" value=\"".$Mother_ID."\"/><br/>
+						<input type=\"text\" name=\"Guardian_ID\" placeholder=\"Guardian ID\" value=\"".$GuardianID."\"/><br/>
+						<input type=\"text\" name=\"Guardian_Relation\" placeholder=\"Guardian Relation\" value=\"".$GuardianRelation."\"/><br/>
+						<input type=\"submit\" name=\"editStudentForm_isSubmitted\"/><br/>";
+					?>
 					</form>
 				</div>
 

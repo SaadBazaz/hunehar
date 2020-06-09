@@ -367,12 +367,13 @@ function clickInsideElement(e, className) {
   
 
   function openModal(modalClassName) {
+	  console.log(modalClassName)
     var modal = document.querySelector(modalClassName);
     modal.style.display = 'block';
     
     $.ajax({
       type: "POST",
-      url: "./getDetails.php",
+      url: "./public/html/getDetails.php",
       data: {"Student_ID": SELECTED_KEY, "modalClassName": modalClassName},
       dataType:'JSON', 
       success: function(response){
@@ -384,7 +385,7 @@ function clickInsideElement(e, className) {
             document.getElementById("GuardianID_accompanyForm").value = response['Student_Guardian_ID'];
             $.ajax({
               type: "POST",
-              url: "./getDetails.php",
+              url: "./public/html/getDetails.php",
               data: {"Guardian_ID": response['Student_Guardian_ID'], "modalClassName": modalClassName},
               dataType:'JSON', 
               success: function(response2){
@@ -399,7 +400,7 @@ function clickInsideElement(e, className) {
           }
           else if (response["modalClassName"] == "#class-change-modal"){
             document.getElementById("StudentID_classChangeForm").value = response['Student_ID'];
-            document.getElementById("Class_classChangeForm").value = response['Student_Class_ID'];
+            document.getElementById("CurrentClass_classChangeForm").value = response['Student_Class_ID'];
           }
           // put on console what server sent back...
       }

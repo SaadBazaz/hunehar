@@ -113,7 +113,7 @@ if (isset($_GET['id'])) {
 												'NAME' => $row0['S_NAME'],
 												'CLASS_ID' => $row0['CLASS_ID'],
 												'G_ID' => $row0['G_ID']);
-								array_push($Children, $tempsib);
+								array_push($Children, $tempchild);
 							}
 						}					
 ?>
@@ -179,7 +179,7 @@ if (isset($_GET['id'])) {
 						 ".$CNIC." <br/>
 						 ".$Number." <br/>
 						 ".$Address." <br/>
-						 ".$isAlive." <br/>
+						 ".$IsAlive." <br/>
 						 ".$EmpID." <br/>
 						";
 					?>

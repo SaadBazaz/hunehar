@@ -119,7 +119,16 @@ $db_sid =
               $MotherID = $row['M_ID']; 
               $GuardianID = $row['G_ID'];   
               $GuardianRelation  = $row['G_RELATION'];
-
+			  
+			  $sql_query0 = "Select class_ID from registration r
+							where r.s_rollnumber = '".$ID."'";
+							
+			 $query_id0123 = oci_parse($con, $sql_query0);
+			$result0123 = oci_execute($query_id0123);
+			
+			 $row0 = oci_fetch_array($query_id0123, OCI_BOTH+OCI_RETURN_NULLS);
+			 
+			 $Class_ID = $row0['CLASS_ID'];
 
               $response = array(
                 'Student_ID'  => $ID,
@@ -131,6 +140,7 @@ $db_sid =
                 'Student_Father_ID' => $FatherID,
                 'Student_Mother_ID' => $MotherID,
                 'Student_Guardian_ID' => $GuardianID,
+				'Student_Class_ID' => $Class_ID,
                 'Student_Guardian_Relation' => $GuardianRelation, 
                 "modalClassName" => $modalClassName
               );
