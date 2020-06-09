@@ -10,10 +10,12 @@ function submitFormWithSelectedKey(inputClassName, formName){
   document.forms[formName].submit();
 }
 
-function openNewTabWithSelectedKey(link){
+function openNewTabWithSelectedKey(link, key=null){
   // if (SELECTED_KEY == ""){
   //   return False;
   // }
+  if (key)
+    SELECTED_KEY = key;
   window.open(link+'?id='+SELECTED_KEY,'_blank')
   // window.location.replace('path/to/page.php?orderid=' + orderid);
 }

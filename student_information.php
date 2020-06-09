@@ -32,7 +32,7 @@ if (isset($_GET['id']))
 
 } else {
     $error = "No ID has been specified.";
-    //redirecting back to Parents page
+    //redirecting back to Students page
     header("Location: ./students.php");
     die();
 }
@@ -67,22 +67,17 @@ if (isset($_GET['id']))
 						$result1 = oci_execute($query_id1);
 						if ($result1)
 						{
-							$siblings = array();
+							$Siblings = array();
 							
 							while($row1 = oci_fetch_array($query_id1, OCI_BOTH+OCI_RETURN_NULLS)) 	// for siblings)
 							{
 								$tempsib = array
 												('Sibling_ID' => $row1['S_ROLLNUMBER'],
 												'Sibling_Name' => $row1['S_NAME']);
-								array_push($siblings, $tempsib);
+								array_push($Siblings, $tempsib);
 							}
 							
-							foreach($siblings as &$value)
-							{
-								echo "Sibling_ID = ". $value['Sibling_ID'] . " " . $value['Sibling_Name']."<br>" ;
-						
-							}
-							//echo $siblings;
+							//echo $Siblings;
 						}	
 						
 						$query_id2 = oci_parse($con, $sql_select2);
@@ -119,22 +114,17 @@ if (isset($_GET['id']))
 						$result4 = oci_execute($query_id4);
 						if ($result4)
 						{
-							$siblings = array();
+							$Class_History = array();
 							
-							while($row4 = oci_fetch_array($query_id4, OCI_BOTH+OCI_RETURN_NULLS)) 	// for siblings)
+							while($row4 = oci_fetch_array($query_id4, OCI_BOTH+OCI_RETURN_NULLS)) 	// for Class History
 							{
-								$tempsib = array
-												('Sibling_ID' => $row4['CLASS_ID'],
-												'Sibling_Name' => $row4['CO_ID'],
-												'R_date' => $row4['R_DATE']);
-								array_push($siblings, $tempsib);
+								$tempch = array
+												('Class_ID' => $row4['CLASS_ID'],
+												'Course_ID' => $row4['CO_ID'],
+												'R_Date' => $row4['R_DATE']);
+								array_push($Class_History, $tempsib);
 							}
 							
-							foreach($siblings as &$value)
-							{
-								echo "Sibling_ID = ". $value['Sibling_ID'] . " " . $value['Sibling_Name']. " " . $value['R_date']."<br>";
-						
-							}
 							
 						}	
 						
@@ -194,11 +184,105 @@ if (isset($_GET['id']))
                 </div>
                 <div class = "card" id="card1">
                     <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
-                    <h1>خوش آمدید</h1>
+                    <h1>Hello world!</h1>
                 </div>
             </div>
-        </div>
-    </div>
+		</div>
+		
+		<div class = "main-row">
+			<div class = "card" id="card2" style="width:300px">
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<h1>Siblings of <?php echo $Name?></h1>
+				<table border="5" rules="none">
+					<tr>
+						<th>Name</th>
+						<th>Roll Number</th>
+					</tr>
+				<?php
+
+					foreach($Siblings as &$value)
+					{
+						
+						echo "
+						<tr onclick=\"openNewTabWithSelectedKey('./student_information.php', '".$value['ROLLNUMBER']."')\">
+							<td>
+							".
+							$value['Sibling_Name']
+							."
+							</td>
+							<td>
+							".
+							$value['Sibling_ID']
+							."
+							</td>
+							<td>
+							".
+							$value['CLASS_ID']
+							."
+							</td>
+							<td>
+							".
+							$value['G_ID']
+							."
+							</td>
+						</tr>";			
+					}
+				?>
+				</table>
+			</div>
+
+
+			<div class = "card" id="card3" style="width:300px">
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<h1><?php echo $Name?>'s Class History</h1>
+				<table border="5" rules="none">
+					<tr>
+						<th>Class ID</th>
+						<th>Course ID</th>
+						<th>Date Taken</th>
+					</tr>
+				<?php
+
+					// foreach($Class_History as &$value)
+					// {
+					// 	echo "Class_History = ". $value['Class_ID'] . " " . $value['Course_ID']. " " . $value['R_Date']."<br>";
+
+					// }
+
+					foreach($Class_History as &$value)
+					{
+						
+						echo "
+						<tr>
+							<td>
+							".
+							$value['Class_ID']
+							."
+							</td>
+							<td>
+							".
+							$value['Course_ID']
+							."
+							</td>
+							<td>
+							".
+							$value['R_Date']
+							."
+							</td>
+							<td>
+							".
+							$value['G_ID']
+							."
+							</td>
+						</tr>";			
+					}
+				?>
+				</table>
+			</div>
+
+
+
+		</div>
 
     
 </body>

@@ -96,7 +96,7 @@ if (isset($_GET['id'])) {
 							$primary_key = "F_ID";
 						}
 						
-						$sql_select0 = "select s.s_rollnumber, r.class_id, s.g_id 
+						$sql_select0 = "select s.s_rollnumber, s.s_name, r.class_id, s.g_id 
 										from student s, registration r
 										where s.s_rollnumber = r.s_rollnumber and s.".$primary_key." = '".$ID."'";
 										
@@ -104,106 +104,18 @@ if (isset($_GET['id'])) {
 						$result0 = oci_execute($query_id0);
 						if ($result0)
 						{
-							$siblings = array();
+							$Children = array();
 							
 							while($row0 = oci_fetch_array($query_id0, OCI_BOTH+OCI_RETURN_NULLS)) 	// for siblings)
 							{
-								$tempsib = array
+								$tempchild = array
 												('ROLLNUMBER' => $row0['S_ROLLNUMBER'],
+												'NAME' => $row0['S_NAME'],
 												'CLASS_ID' => $row0['CLASS_ID'],
 												'G_ID' => $row0['G_ID']);
-								array_push($siblings, $tempsib);
+								array_push($Children, $tempsib);
 							}
-							
-							foreach($siblings as &$value)
-							{
-								echo "ROLLNUMBER = ". $value['ROLLNUMBER'] . " " . $value['CLASS_ID']." " . $value['G_ID']."<br>";
-						
-							}
-							//echo $siblings;
 						}					
-						/*
-						$sql_select1 = "select * from student where ".$primary_key." = '".$ID."'";
-						$sql_select2 = "select * from registration where M_ID = '".$Mother_ID."'";
-						$sql_select3 = "select * from Father where F_ID = '".$Father_ID."'";
-						$sql_select4 = "select * from Registration where s_rollnumber = '".$ID."'";
-						
-						$query_id1 = oci_parse($con, $sql_select1);
-						$result1 = oci_execute($query_id1);
-						if ($result1)
-						{
-							$siblings = array();
-							
-							while($row1 = oci_fetch_array($query_id1, OCI_BOTH+OCI_RETURN_NULLS)) 	// for siblings)
-							{
-								$tempsib = array
-												('Sibling_ID' => $row1['S_ROLLNUMBER'],
-												'Sibling_Name' => $row1['S_NAME']);
-								array_push($siblings, $tempsib);
-							}
-							
-							foreach($siblings as &$value)
-							{
-								echo "Sibling_ID = ". $value['Sibling_ID'] . " " . $value['Sibling_Name']."<br>" ;
-						
-							}
-							//echo $siblings;
-						}	
-						
-						$query_id2 = oci_parse($con, $sql_select2);
-						$result2 = oci_execute($query_id2);
-						if ($result2)
-						{
-							$row2 = oci_fetch_array($query_id2, OCI_BOTH+OCI_RETURN_NULLS);	// for mother info
-							if ($row2)
-							{
-								$mother_name = $row2['M_NAME'];
-							}
-							else
-							{
-								
-							}
-						}	
-						
-						$query_id3 = oci_parse($con, $sql_select3);
-						$result3 = oci_execute($query_id3);
-						if ($result3)
-						{
-							$row3 = oci_fetch_array($query_id3, OCI_BOTH+OCI_RETURN_NULLS);	// for father info
-							if ($row3)
-							{
-								$Father_name = $row3['F_NAME'];
-							}
-							else
-							{
-								
-							}
-						}	
-						
-						$query_id4 = oci_parse($con, $sql_select4);
-						$result4 = oci_execute($query_id4);
-						if ($result4)
-						{
-							$siblings = array();
-							
-							while($row4 = oci_fetch_array($query_id4, OCI_BOTH+OCI_RETURN_NULLS)) 	// for siblings)
-							{
-								$tempsib = array
-												('Sibling_ID' => $row4['CLASS_ID'],
-												'Sibling_Name' => $row4['CO_ID'],
-												'R_date' => $row4['R_DATE']);
-								array_push($siblings, $tempsib);
-							}
-							
-							foreach($siblings as &$value)
-							{
-								echo "Sibling_ID = ". $value['Sibling_ID'] . " " . $value['Sibling_Name']. " " . $value['R_date']."<br>";
-						
-							}
-							
-						}	
-						
-						*/
 ?>
 
 
@@ -256,10 +168,56 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class = "card" id="card1">
                     <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
-                    <h1>خوش آمدید</h1>
+                    <h1>Hello world!</h1>
                 </div>
             </div>
-        </div>
+		</div>
+		
+		<div class = "main-row">
+			<div class = "card" id="card2" style="width:300px">
+				<button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+				<h1>Children of <?php echo $Name?></h1>
+				<table border="5" rules="none">
+					<tr>
+						<th>Name</th>
+						<th>Roll Number</th>
+						<th>Class ID</th>
+						<th>Guardian ID</th>
+					</tr>
+				<?php
+					foreach($Children as &$value)
+					{
+						echo "
+						<tr onclick=\"openNewTabWithSelectedKey('./student_information.php', '".$value['ROLLNUMBER']."')\">
+							<td>
+							".
+							$value['NAME']
+							."
+							</td>
+							<td>
+							".
+							$value['ROLLNUMBER']
+							."
+							</td>
+							<td>
+							".
+							$value['CLASS_ID']
+							."
+							</td>
+							<td>
+							".
+							$value['G_ID']
+							."
+							</td>
+						</tr>";			
+					}
+				?>
+				</table>
+			</div>
+		</div>
+
+
+
     </div>
 
     
