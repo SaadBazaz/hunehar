@@ -370,6 +370,43 @@ function clickInsideElement(e, className) {
     var modal = document.querySelector(modalClassName);
     modal.style.display = 'block';
     
+    $.ajax({
+      type: "POST",
+      url: "./getDetails.php",
+      data: {"Student_ID": SELECTED_KEY, "modalClassName": modalClassName},
+      dataType:'JSON', 
+      success: function(response){
+          console.log(response);
+          if (response["modalClassName"] == "#student-accompanying-modal"){
+            document.getElementById("StudentID_accompanyForm").value = response['Student_ID'];
+            document.getElementById("StudentName_accompanyForm").value = response['Student_Name'];
+            document.getElementById("Class_accompanyForm").value = response['Student_Class_ID'];
+            document.getElementById("GuardianID_accompanyForm").value = response['Student_Guardian_ID'];
+            $.ajax({
+              type: "POST",
+              url: "./getDetails.php",
+              data: {"Guardian_ID": response['Student_Guardian_ID'], "modalClassName": modalClassName},
+              dataType:'JSON', 
+              success: function(response2){
+                  console.log(response2);
+                  if (response2["modalClassName"] == "#student-accompanying-modal"){
+                    document.getElementById("GuardianName_accompanyForm").value = response['Guardian_Name'];
+        
+                  }
+                  // put on console what server sent back...
+              }
+            });
+          }
+          else if (response["modalClassName"] == "#class-change-modal"){
+            document.getElementById("StudentID_classChangeForm").value = response['Student_ID'];
+            document.getElementById("Class_classChangeForm").value = response['Student_Class_ID'];
+          }
+          // put on console what server sent back...
+      }
+    });
+
+
+    
   }
 
   function closeModal(modalClassName) {

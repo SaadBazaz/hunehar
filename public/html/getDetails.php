@@ -24,6 +24,8 @@ $db_sid =
 
 
 <?php
+  if(isset($_POST['modalClassName']))
+    $modalClassName = $_POST["modalClassName"];
   if(isset($_POST['Parent_ID'])) {
     if ($_POST['Parent_ID']){
       $Parent_ID = trim($_POST['Parent_ID']);
@@ -54,6 +56,7 @@ $db_sid =
             'Parent_IsAlive' => $IsAlive,
             'Parent_Employee_ID' => $EmpID,
             'Parent_Relation' => "FATHER",
+            "modalClassName" => $modalClassName
         );
         }
         else {
@@ -83,6 +86,7 @@ $db_sid =
                 'Parent_IsAlive' => $IsAlive,
                 'Parent_Employee_ID' => $EmpID,
                 'Parent_Relation' => "MOTHER",
+                "modalClassName" => $modalClassName
             );
         }
         else {
@@ -127,8 +131,9 @@ $db_sid =
                 'Student_Father_ID' => $FatherID,
                 'Student_Mother_ID' => $MotherID,
                 'Student_Guardian_ID' => $GuardianID,
-                'Student_Guardian_Relation' => $GuardianRelation,
-            );
+                'Student_Guardian_Relation' => $GuardianRelation, 
+                "modalClassName" => $modalClassName
+              );
 
 
 
@@ -162,6 +167,7 @@ $db_sid =
               'Guardian_Address' => $Address,
               'Guardian_Gender' => $Gender,
               'Guardian_Employee_ID' => $EmpID,
+              "modalClassName" => $modalClassName
           );
 
 

@@ -173,6 +173,8 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
 
     <link href="./public/html/main.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="./public/html/home.js"></script>
+    <script type="text/javascript" src="./public/html/students.js"></script>
+
     <!-- FONTAWESOME -->
     <!-- jQuery library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -469,17 +471,17 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                 <form action="./students.php" method="POST">
                     <div class="main-row" style="padding-top: 20px;">
                         <label for="StudentID" style="font-style: italic;">Student ID </label>
-                        <input type="text" name="StudentID" placeholder="Student ID" value="i180621"
+                        <input type="text" id="StudentID_classChangeForm" name="StudentID" placeholder="Student ID" value="i180621"
                             style="margin-left: 5px" ; />
                     </div>
                     <div class="main-row">
                         <label for="CurrentClass" style="font-style: italic;">Current Class </label>
-                        <input type="text" name="CurrentClass" placeholder="Current Class" value="5D"
+                        <input type="text" id="CurrentClass_classChangeForm" name="CurrentClass" placeholder="Current Class" value="5D"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row">
                         <label for="NewClass" style="font-style: italic;">New Class </label>
-                        <input type="text" name="NewClass" placeholder="Enter a new Class..."
+                        <input type="text" id="NewClass_classChangeForm" name="NewClass" placeholder="Enter a new Class..."
                             style="margin-left: 5px" />
                     </div>
                     <textarea id="ClassChangeReason" name="ClassChangeReason" placeholder="Reason" name="s_content"
@@ -523,17 +525,17 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                     <h3 style="color:black">Student Information</h3>
                     <div class="main-row" style="height: auto;">
                         <label for="StudentID" style="font-weight: bolder;">Student ID </label>
-                        <input type="text" name="StudentID" placeholder="Student ID" value="i180621" disabled
+                        <input type="text" id="StudentID_accompanyForm" name="StudentID" placeholder="Student ID" value="i180621"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row" style="height: auto;">
                         <label for="StudentName" style="font-weight: bolder;">Student Name </label>
-                        <input type="text" name="StudentName" placeholder="Student Name" value="Saad Bazaz" disabled
+                        <input type="text"  id="StudentName_accompanyForm" name="StudentName" placeholder="Student Name" value="Saad Bazaz"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row" style="height: auto;">
                         <label for="Class" style="font-weight: bolder;">Class </label>
-                        <input type="text" name="Class" placeholder="Class" value="5D" disabled
+                        <input type="text"  id="Class_accompanyForm" name="Class" placeholder="Class" value="5D"
                             style="margin-left: 5px" />
                     </div>
 
@@ -542,12 +544,12 @@ if(isset($_POST["accompanyStudentForm_isSubmitted"])){
                     </div>
                     <div class="main-row">
                         <label for="GuardianID" style="font-style: italic;">Guardian ID </label>
-                        <input type="text" name="GuardianID" placeholder="Enter Guardian ID..."
+                        <input type="text"  id="GuardianID_accompanyForm" name="GuardianID" placeholder="Enter Guardian ID..."
                             style="margin-left: 5px" ; />
                     </div>
                     <div class="main-row">
                         <label for="GuardianName" style="font-style: italic;">Guardian Name </label>
-                        <input type="text" name="GuardianName" placeholder="Enter Guardian Name..." value="Shabaana Bibi"
+                        <input type="text"  id="GuardianName_accompanyForm" name="GuardianName" placeholder="Enter Guardian Name..." value="Shabaana Bibi"
                             style="margin-left: 5px" />
                     </div>
                     <div class="main-row" style="justify-content: flex-start;">
