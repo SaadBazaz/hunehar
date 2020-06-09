@@ -86,7 +86,7 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
                         $GuardianID = $row['G_ID'];   
                         $GuardianRelation  = $row['G_RELATION'];
 						
-						$sql_select1 = "select * from student where M_ID = '".$Mother_ID."' and F_ID = '".$Father_ID."'";
+						$sql_select1 = "select * from student where M_ID = '".$Mother_ID."' or F_ID = '".$Father_ID."'";
 						$sql_select2 = "select * from Mother where M_ID = '".$Mother_ID."'";
 						$sql_select3 = "select * from Father where F_ID = '".$Father_ID."'";
 						$sql_select4 = "select * from Registration where s_rollnumber = '".$ID."'";
@@ -101,7 +101,8 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 							{
 								$tempsib = array
 												('Sibling_ID' => $row1['S_ROLLNUMBER'],
-												'Sibling_Name' => $row1['S_NAME']);
+												'Sibling_Name' => $row1['S_NAME'],
+												'Sibling_G_ID' => $row1['G_ID']);
 								array_push($Siblings, $tempsib);
 							}
 							
@@ -150,7 +151,7 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 												('Class_ID' => $row4['CLASS_ID'],
 												'Course_ID' => $row4['CO_ID'],
 												'R_Date' => $row4['R_DATE']);
-								array_push($Class_History, $tempsib);
+								array_push($Class_History, $tempch);
 							}
 							
 							
@@ -210,23 +211,27 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
                         <div class="person-details subtitle"><?php echo $ID ?></div>
                     </div>
 				</div>
-				<div class = "card" id="card0">
+				<div class = "card" id="card0" style="display:none">
                     <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
 					<h2>Edit Student</h2>
 					<form action="./student_information.php" method="POST">
-						<input type="text" name="Name" placeholder="Name"/><br/>
+					<?php 
+						echo "
+						<input type=\"text\" name="Name" placeholder="Name"/><br/>
 						<input type="text" name="BayForm" placeholder="BayForm"/><br/>
 						<select name="Gender" id="Gender">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
+							
 						</select>						
-						<input type="date" name="DOB" placeholder="DOB"/><br/>
+						<input type="date" name="DOB" value="" placeholder="DOB"/><br/>
 						<input type="text" name="Year_Enrolled" placeholder="Year Enrolled"/><br/>
 						<input type="text" name="Father_ID" placeholder="Father ID"/><br/>
 						<input type="text" name="Mother_ID" placeholder="Mother ID"/><br/>
 						<input type="text" name="Guardian_ID" placeholder="Guardian ID"/><br/>
 						<input type="text" name="Guardian_Relation" placeholder="Guardian Relation"/><br/>
-						<input type="submit" name="editStudentForm_isSubmitted"/><br/>
+						<input type="submit" name="editStudentForm_isSubmitted"/><br/>";
+						?>
 					</form>
 				</div>
 
@@ -271,7 +276,7 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 					{
 						
 						echo "
-						<tr onclick=\"openNewTabWithSelectedKey('./student_information.php', '".$value['ROLLNUMBER']."')\">
+						<tr onclick=\"openNewTabWithSelectedKey('./student_information.php', '".$value['Sibling_ID']."')\">
 							<td>
 							".
 							$value['Sibling_Name']
@@ -284,12 +289,7 @@ if (isset($_GET['editStudentForm_isSubmitted'])){
 							</td>
 							<td>
 							".
-							$value['CLASS_ID']
-							."
-							</td>
-							<td>
-							".
-							$value['G_ID']
+							$value['Sibling_G_ID']
 							."
 							</td>
 						</tr>";			
