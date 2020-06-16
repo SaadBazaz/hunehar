@@ -224,7 +224,7 @@ else
                 <div class = "person">
                     <div class="person-picture">
                         <div class="image-cropper" style = "height:80px; width:80px; ">
-                            <img class = "nav-img" src = "./public/images/Saad-Bazaz.jpg">
+                            <img class = "nav-img" src = "./public/images/default-picture_0_0.png">
                         </div>
                     </div>
                     <div class="person-details">
