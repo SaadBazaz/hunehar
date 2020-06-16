@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<head>
+
+    <link href="./main.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="./home.js"></script>
+    <!-- FONTAWESOME -->
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+          
+        <div class = "nav nav-left">
+            <h1 class="logo"><a href="./home.html"><img src = "./public/images/Logo.PNG" style = "display:inline-block; height:40px; width: auto"></a></h1>
+            <div><svg style = "fill:#ffffff" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 18 18"><path d="M12.44 6.44L9 9.88 5.56 6.44 4.5 7.5 9 12l4.5-4.5z"/></svg></div>
+        </div>
+        <div class="nav nav-right">
+            <div class="nav-links">
+                <a href="home.php">Dashboard</a>
+                <a href="classes.php">Classes</a>
+                <a href="students.php">Students</a>
+                <a href="parents.php">Parents</a>
+            </div>
+            <div onclick="openContextMenu(event, 'image-cropper', '#context-menu')" class="image-cropper profile-button">
+                <img  class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+            </div>
+        </div>
+</nav>
+
+    <div class = "main">
+        
+        <div class = "main-header">
+            <div class = "main-row">
+                <div class = "person">
+                    <div class="person-picture">
+                        <div class="image-cropper" style = "height:80px; width:80px; ">
+                            <img class = "nav-img" src = "./public/images/Fawad-Khan.jpg">
+                        </div>
+                    </div>
+                    <div class="person-details">
+                        <div class="person-details title">Fawad Khan</div>
+                        <div class="person-details subtitle">ADMINISTRATOR</div>
+                    </div>
+                </div>
+                <div class = "card" id="card1">
+                    <button class = "mini-button card-close-button" style="font-size: smaller; background-color: transparent;" onclick="destroyCard('#card1')"><i class="fa fa-close"></i></button>
+                    <h1>خوش آمدید</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="person-information-grid">
+            <div class="person-information-grid-row">
+                <p>Male</p>
+                <p>Class 1D</p>
+                <p>DoB: 08/02/1999</p>
+            </div>
+            <div class="person-information-grid-row">
+                <p>Male</p>
+                <p>Class 1D</p>
+                <p>Born on 08/02/1999</p>
+            </div>            
+            
+        </div>
+        <div class = "main-body">
+            <!-- Body content comes here  -->
+            <div class = "main-row">
+                <!-- <table border="5" rules="none">
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "../images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>    
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "../images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>    
+                    <tr>
+                        <td style="width:80px">
+                            <div  class="image-cropper profile-button">
+                                <img  class = "nav-img" src = "../images/Fawad-Khan.jpg">
+                            </div>
+                        </td>
+                        <td>
+                            i180621
+                        </td>
+                        <td>
+                            Saad Bazaz
+                        </td>
+                        <td>
+                            21 years
+                        </td>
+                        <td>
+                            M
+                        </td>
+                        <td style="width:auto; padding:0">
+                            <div class="status_buttons" style="padding-bottom: 4px;">
+                                <i class="fa fa-circle" style="color:greenyellow"></i>
+                                <div class="more_options">
+                                    <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                </div>  
+                            </div>
+    
+                        </td>
+                        </tr>                       
+                        <tr>
+                            <td style="width:80px">
+                                <div  class="image-cropper profile-button">
+                                    <img  class = "nav-img" src = "../images/Fawad-Khan.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                i180621
+                            </td>
+                            <td>
+                                Saad Bazaz
+                            </td>
+                            <td>
+                                21 years
+                            </td>
+                            <td>
+                                M
+                            </td>
+                            <td style="width:auto; padding:0">
+                                <div class="status_buttons" style="padding-bottom: 4px;">
+                                    <i class="fa fa-circle" style="color:greenyellow"></i>
+                                    <div class="more_options">
+                                        <button onclick="openContextMenu(event, 'more_options', '#context-menu2')" class="mini-button" style="background-color: transparent;">
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </div>  
+                                </div>
+        
+                            </td>
+                            </tr>                    
+                </table> -->
+            </div>
+        </div>
+        <!-- <div class = "card">
+            <h1>Welcome to Slate.</h1>
+        </div> -->
+    </div>
+
+          <!-- / The Context Menu -->
+          <nav id="context-menu" class="context-menu">
+            <div class="context-menu-container-expander">
+
+            <ul class="context-menu__items">
+              <!-- <li class="context-menu__item">
+                <a href="#" class="context-menu__link" data-action="Pin">Pin</a>
+              </li> -->
+              <li class="context-menu__item">
+                <a href="#" class="context-menu__link" data-action="My Account">My Account</a>
+              </li>
+              <li class="context-menu__item">
+                <a href="./login.html" class="context-menu__link_delete" data-action="Sign Out">Sign Out</a>
+              </li>
+            </ul>        
+        </div>
+          </nav>
+
+
+</body>
+
