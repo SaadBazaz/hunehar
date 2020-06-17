@@ -7,7 +7,7 @@ The task provided to us was to design and develop a database for an NGO ‘Hamar
 ## Web Interface
 The web interface features a library of very basic HTML/CSS/JS elements built from scratch with minimum help from the Internet. The overall layout has been kept simple for ergonomics, minimalism and easy understandability. We have borrowed concepts from Material and Bootstrap without using either of the respective UI libraries.
 
-![Home Page]('./public/images/Sample Screenshots/Home-Page.PNG')
+![Home Page]('https://github.com/SaadBazaz/hunehar/blob/master/public/images/Sample%20Screenshots/Home-Page.PNG')
 
 ## Instructions
 Place this entire folder in htdocs of your Zendcore folder, then access from
